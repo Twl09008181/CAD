@@ -18,5 +18,10 @@ int main(int argc,char *argv[])
     // string s = "  ";
     // cout<<get_first_of_line(s).empty();
 
+
+
+    string input = "abc(1,2,3  5,4  sa)";
+    show_vector(split(input,',',4,-1,-1,' '));
+
     return 0;
 }

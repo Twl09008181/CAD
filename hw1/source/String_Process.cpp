@@ -5,13 +5,26 @@
 #include<iostream>
 using namespace std;
 
-//return the number list
-//with the format ()
-//range is str[start_i,end_i) 
+
 /*
-Function :vector<string> split(const string&str,char symbol,int i,int j,bool first)
+Function :vector<string> split(const string&str,char symbol,int l,int r,int num,const char omit)
 description:
-input a string and symbol,the function will split the string by the symbol and form a new vector,and return .
+    input a string and symbol,the function will split the string by the symbol and form a new string vector,and return .
+    l : the start index you want to check,default is 0
+    r : the end index you want to check,default is -1,means str.size();
+    check range is = [l,r)
+
+    num: the time you want to split by symbol,this means your return size is num+1
+    omit:you can choose another character type to omit.
+    example:
+    symbol =','
+    omit = ' ' //means space
+    l = 4
+    r = -1
+    num = -1
+    input = abc(1,2,3  5,4  sa)
+    then output : [1,2,35,4sa)]
+
 key: this function will omit all space character.
 */
 vector<string> split(const string&str,char symbol,int l,int r,int num,const char omit)//[l,r)
