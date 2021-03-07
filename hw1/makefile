@@ -13,19 +13,16 @@ LIBOBJ = $(patsubst %.cpp,%.o,$(LIBSRC))
 
 H_file = ./header/*.h
 
-#執行
-run: $(target).out
-	./$< $(file_name).bench  $(file_name).v 
-	
 #產生執行檔案
 $(target).out:$(LIBOBJ) $(TESTOBJ)
 	$(CC) $(FLAG) $^ -o $@
-
 #產生.o檔案
 %.o:%.cpp $(H_file)
 	$(CC) $(FLAG) $< -c -o $@
 clear:
 	rm *.v *.out $(LIBOBJ) $(TESTOBJ)
-
+#執行
+run: $(target).out
+	./$< $(file_name).bench  $(file_name).v 
 
 

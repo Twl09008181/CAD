@@ -1,1 +1,4 @@
 .vscode
+course
+*.o
+.out
