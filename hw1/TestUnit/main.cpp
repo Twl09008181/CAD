@@ -51,7 +51,8 @@ void read(char *argv[],vector<gate>&Gate,vector<int>&Output_V,ostringstream&Inpu
     {   
         count_line++;
         string keyword = get_first_of_line(line);//get the first nonempty words. 
-        if(keyword.empty()||keyword.front()=='#')continue;//# or empty line.
+      
+        if(keyword.empty()||keyword.front()=='#'||int(keyword.at(0)<=32))continue;//# or empty line.
 
         if(keyword.find("INPUT")==0)//is INPUT
         {   
@@ -91,6 +92,7 @@ void print(char *argv[],vector<gate>&Gate,vector<int>&Output_V,ostringstream&Inp
         cerr<<"cann't open "<<argv[2]<<endl;
         exit(1);
     }
+    output_v<<"`timescale 1ns / 1ps"<<endl;
     output_v<<"module "<<split(argv[1],'.').at(0)<<" ("<<Input_N.str()<<","<<Output_N.str()<<");\n"<<endl;
     output_v<<"input "<<Input_N.str()<<";\n"<<endl<<"output "<<Output_N.str()<<";\n"<<endl<<"wire "<<Wire_N.str()<<";\n"<<endl;
 

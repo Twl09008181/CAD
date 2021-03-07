@@ -22,7 +22,10 @@ $(target).out:$(LIBOBJ) $(TESTOBJ)
 clear:
 	rm *.v *.out $(LIBOBJ) $(TESTOBJ)
 #執行
-run: $(target).out
+tool:
+	source /usr/cad/cadence/CIC/incisiv.cshrc
+	source /usr/cad/synopsys/CIC/verdi.cshrc
+run: $(target).out 
 	./$< $(file_name).bench  $(file_name).v 
 
 
