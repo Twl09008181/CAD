@@ -25,7 +25,7 @@ $(target).out:$(LIBOBJ) $(TESTOBJ)
 %.o:%.cpp $(H_file)
 	$(CC) $(FLAG) $< -c -o $@
 clear:
-	rm *.v *.out
+	rm *.v *.out $(LIBOBJ) $(TESTOBJ)
 
 
 
