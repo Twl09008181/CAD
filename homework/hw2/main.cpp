@@ -2,16 +2,14 @@
 #include<fstream>
 #include<string>
 using namespace std;
-#include "DFG.h"
+#include "./lib/DFG.h"
 
 DFG *get_DFG(char *file_name);
 
 
 int main(int argc,char*argv[])
 {   
-
     DFG *dfg = get_DFG(argv[1]);
-    
     return 0;
 }
 
@@ -54,8 +52,7 @@ DFG *get_DFG(char *file_name)
         while(isspace(*last_non_space)&&last_non_space!=line.begin())
             --last_non_space;
 
-
-        DFG::operation_type T = *last_non_space; 
+        auto T = *last_non_space; 
     
         int num = 0;
         for(auto iter = line.begin();iter!=last_non_space;iter++)//累加
