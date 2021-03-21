@@ -3,13 +3,17 @@
 #include<string>
 using namespace std;
 #include "./lib/DFG.h"
+#include "./lib/UC_schler.h"
+
 
 DFG *get_DFG(char *file_name);
-
-
 int main(int argc,char*argv[])
 {   
     DFG *dfg = get_DFG(argv[1]);
+    ASAP(dfg);
+    ALAP(dfg,11);
+    
+
     return 0;
 }
 
@@ -42,7 +46,7 @@ DFG *get_DFG(char *file_name)
     DFG *dfg = new DFG(node_num);
 
 
-    //add   node------------------------------------------------------------
+    // //add   node------------------------------------------------------------
 
     while(node_num&&getline(input_file,line))
     {
@@ -64,8 +68,8 @@ DFG *get_DFG(char *file_name)
     }
     if(node_num){cerr<<"get node error"<<endl;exit(1);}
     
-    //dfg->show_node();
-    //add  node------------------------------------------------------------
+ 
+    // //add  node------------------------------------------------------------
 
 
     //add edges
@@ -96,7 +100,7 @@ DFG *get_DFG(char *file_name)
         edge_num--;
     }
     if(edge_num){cerr<<"get edges error"<<endl;exit(1);}
-    dfg->show_DFG();
+    //dfg->show_DFG();
 
 
 

@@ -2,9 +2,19 @@
 #include"DFG.h"
 void DFG::add_node(node_val n,DFG_node::operation_type t)
 {
+    
     if(Decode.find(n)==Decode.end()){
         Decode[n] = V.size();//加入map當中
         V.push_back({n,t});
+        if(t=='i')Input_index.push_back(V.size()-1);//方便做ASAP
+        else if(t=='o')Output_index.push_back(V.size()-1);//方便做ALAP
+
+        else{//operation 
+            if(op.find(t)==op.end())//計算每種operation的出現次數
+                op[t] = 1;
+            else
+                op[t]++;
+        }
     }
     else{
         cerr<<"repeat node number : "<<n<<"in DFG"<<endl;
