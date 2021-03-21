@@ -45,43 +45,31 @@ private:
     }
 };
 
+
+
 class DFG{
 public:
     using index = unsigned;
     using node_val = DFG_node::node_val;
- 
     using OP_type_counter = map<DFG_node::operation_type,int>;
+
+    //some basic graph method
     DFG(int n){V.reserve(n);}
     ~DFG(){}
     void add_node(node_val n,char t);
     void add_edge(node_val n1,node_val n2);
-
-
     void show_DFG()const;
     const vector<DFG_node>&get_node_vector()const{return V;}//return all node_vector
-    vector<DFG_node>get_input_vector()const
-    {
-        vector<DFG_node>Input;Input.reserve(Input_index.size());
-        for(auto i:Input_index)Input.push_back(V.at(i));
-        return Input;
-    }
-    vector<DFG_node>get_output_vector()const
-    {
-        vector<DFG_node>Output;Output.reserve(Output_index.size());
-        for(auto i:Output_index)Output.push_back(V.at(i));
-        return Output;
-    }
-    const vector<index> &get_input_index()const{return Input_index;}//Input node's index
-    const vector<index> &get_output_index()const{return Output_index;}//Output node's index
     const DFG_node&get_node(index i)const{return V.at(i);}//enter index ,then return the DFG_node&
-    index get_index(node_val v){
-        if(Decode.find(v)!=Decode.end())
-            return Decode[v];
-        else 
-            return -1;
-    }
+    index get_index(node_val v){return (Decode.find(v)!=Decode.end())? Decode[v]:-1;}//enter the DFG_node.val ,return the index in V
     
-    const OP_type_counter&get_op_type()const{return op;}
+    //some special function DFG has
+    vector<DFG_node>get_input_vector()const;//return input_vector
+    vector<DFG_node>get_output_vector()const;//return output_vector
+    const vector<index> &get_input_index()const{return Input_index;}//Input node's index in V
+    const vector<index> &get_output_index()const{return Output_index;}//Output node's index in V
+    const OP_type_counter&get_op_type()const{return op;}//return operation map type:frequency
+
 private:
     map<node_val,index>Decode;
     OP_type_counter op;
