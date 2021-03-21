@@ -12,7 +12,7 @@ int main(int argc,char*argv[])
     DFG *dfg = get_DFG(argv[1]);
    
     vector<int>schedule_result1 = ASAP(dfg);
-    vector<int>schedule_result2 = ALAP(dfg,11);
+    vector<int>schedule_result2 = ALAP(dfg,10);
     const vector<DFG_node>&V = dfg->get_node_vector();
     //show the schedule result
     cout<<"ASAP : "<<endl;

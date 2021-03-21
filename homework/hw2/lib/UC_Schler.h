@@ -10,10 +10,10 @@ using namespace std;
 int ASAP_start_time(int dummy);
 int ALAP_start_time(int latency);
 
-int ASAP_get_degree(const DFG_node&v);
-int ALAP_get_degree(const DFG_node&v);
-const forward_list<DFG_node::node_val>&ASAP_get_check_list(const DFG_node&v);
-const forward_list<DFG_node::node_val>&ALAP_get_check_list(const DFG_node&v);
+int get_degree_parent(const DFG_node&v);//看parent方向的degree
+int get_degree_child(const DFG_node&v);//看child方向的degree
+const forward_list<DFG_node::node_val>&get_child_list(const DFG_node&v);
+const forward_list<DFG_node::node_val>&get_parent_list(const DFG_node&v);
 
 int ASAP_schedule_time(int current_time,int delay1,int delay2,int now_time);
 int ALAP_schedule_time(int current_time,int delay1,int delay2,int now_time);
@@ -28,8 +28,8 @@ struct UC_Schler                //Unconstrained_Scheduling
 
 const UC_Schler S[]=
 {
-    {ASAP_start_time,ASAP_get_degree,ASAP_get_check_list,ASAP_schedule_time},
-    {ALAP_start_time,ALAP_get_degree,ALAP_get_check_list,ALAP_schedule_time},
+    {ASAP_start_time,get_degree_parent,get_child_list,ASAP_schedule_time},
+    {ALAP_start_time,get_degree_child,get_parent_list,ALAP_schedule_time},
 };
 vector<int> ncsch(DFG*dfg,UC_Schler par,int latency=0);//generic function used by ASAP/ALAP
 vector<int> ASAP(DFG*dfg);

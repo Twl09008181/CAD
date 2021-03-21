@@ -1,10 +1,10 @@
 #include"UC_Schler.h"
 int ASAP_start_time(int dummy){return -1;}
 int ALAP_start_time(int latency){return latency;}
-int ASAP_get_degree(const DFG_node&v){return v.get_parent_num();}
-int ALAP_get_degree(const DFG_node&v){return v.get_child_num();}
-const forward_list<DFG_node::node_val>&ASAP_get_check_list(const DFG_node&v){return v.get_child_list();}
-const forward_list<DFG_node::node_val>&ALAP_get_check_list(const DFG_node&v){return v.get_parent_list();}
+int get_degree_parent(const DFG_node&v){return v.get_parent_num();}
+int get_degree_child(const DFG_node&v){return v.get_child_num();}
+const forward_list<DFG_node::node_val>&get_child_list(const DFG_node&v){return v.get_child_list();}
+const forward_list<DFG_node::node_val>&get_parent_list(const DFG_node&v){return v.get_parent_list();}
 int ASAP_schedule_time(int current_time,int delay1,int delay2,int now_time){return max(current_time+delay1,now_time);}//delay傳入current_delay
 int ALAP_schedule_time(int current_time,int delay1,int delay2,int now_time){return min(current_time-delay2,now_time);}//delay傳入next_delay
 
