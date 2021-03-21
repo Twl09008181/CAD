@@ -10,8 +10,8 @@ DFG *get_DFG(char *file_name);
 int main(int argc,char*argv[])
 {   
     DFG *dfg = get_DFG(argv[1]);
-    ASAP(dfg);
-    ALAP(dfg,11);
+    vector<int>schedule_result1 = ASAP(dfg);
+    vector<int>schedule_result2 = ALAP(dfg,11);
     
 
     return 0;

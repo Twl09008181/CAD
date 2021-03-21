@@ -26,9 +26,12 @@ struct UC_Schler                //Unconstrained_Scheduling
     int (*schedule_time)(int,int,int,int);
 };
 
-extern UC_Schler S[];//use extern to get S in .cpp
-
-void ncsch(DFG*dfg,UC_Schler par,int latency=0);//generic function used by ASAP/ALAP
-void ASAP(DFG*dfg);
-void ALAP(DFG*dfg,int latency);
+const UC_Schler S[]=
+{
+    {ASAP_start_time,ASAP_get_degree,ASAP_get_check_list,ASAP_schedule_time},
+    {ALAP_start_time,ALAP_get_degree,ALAP_get_check_list,ALAP_schedule_time},
+};
+vector<int> ncsch(DFG*dfg,UC_Schler par,int latency=0);//generic function used by ASAP/ALAP
+vector<int> ASAP(DFG*dfg);
+vector<int> ALAP(DFG*dfg,int latency);
 #endif
