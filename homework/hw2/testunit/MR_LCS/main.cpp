@@ -4,9 +4,9 @@
 #include<forward_list>
 #include<list>
 using namespace std;
-#include "./lib/DFG.h"
-#include "./lib/UC_schler.h"
-#include "./lib/MR_LCS.h"
+#include "../../lib/DFG.h"
+#include "../../lib/UC_schler.h"
+#include "../../lib/MR_LCS.h"
 
 
 DFG *get_DFG(char *file_name);

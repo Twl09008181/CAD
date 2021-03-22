@@ -23,8 +23,47 @@ public:
     const forward_list<node_val>&get_parent_list()const{return parent;}
     int get_child_num()const{return child_size;}
     int get_parent_num()const{return parent_size;}
-    operation_type get_type()const{return T;}
+    
     node_val get_val()const{return val;}
+
+    
+    
+    operation_type get_type_char()const{return T;}
+    int get_type_index()const{
+        switch (T)
+        {
+        case 'i':return 0;break;
+        case 'o':return 1;break;
+        case '+':return 2;break;
+        case '*':return 3;break;
+        default:
+            break;
+        }
+        return -1;
+    }
+    int get_type_index_ex_I_O()const{
+        switch (T)
+        {
+        case '+':return 0;break;
+        case '*':return 1;break;
+        default:
+            break;
+        }
+        return -1;
+    }
+    //改硬體的delay改這邊
+    int get_delay()const{
+        switch (T)
+        {
+        case 'i':return 0;break;
+        case 'o':return 0;break;
+        case '+':return 1;break;
+        case '*':return 3;break;
+        default:
+            break;
+        }
+        return -1;   
+    }
    
 private:
     node_val val;

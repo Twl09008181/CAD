@@ -3,6 +3,14 @@ int ASAP_start_time(int dummy){return -1;}
 int ALAP_start_time(int latency){return latency;}
 int get_degree_parent(const DFG_node&v){return v.get_parent_num();}
 int get_degree_child(const DFG_node&v){return v.get_child_num();}
+vector<int>get_degree(const vector<DFG_node>&V,int(*f)(const DFG_node&v))
+{
+    vector<int>degree(V.size(),-1);
+    for(int i = 0;i<V.size();i++)
+        degree[i] = f(V.at(i));
+    return degree;
+}
+
 const forward_list<DFG_node::node_val>&get_child_list(const DFG_node&v){return v.get_child_list();}
 const forward_list<DFG_node::node_val>&get_parent_list(const DFG_node&v){return v.get_parent_list();}
 int ASAP_schedule_time(int current_time,int delay1,int delay2,int now_time){return max(current_time+delay1,now_time);}//delay傳入current_delay
@@ -26,24 +34,17 @@ vector<int> ncsch(DFG*dfg,UC_Schler par,int latency)
       
         if(!degree[i]){Schedule_Q.push_front(i);}//i is index,not node_val
         
-        switch (v.get_type())//you can change this to set delay.
-        {
-        case 'i':{delay.at(i) = 1;break;}//input 
-        case 'o':{delay.at(i) = 1;break;}//output
-        case '+':{delay.at(i) = 1;break;}//adder
-        case '*':{delay.at(i) = 3;break;}//mul
-        default:break;
-        }
+        delay.at(i) = v.get_delay();
     }    
 
     //start schedule
     while(!Schedule_Q.empty())
     {
         int cur_index = Schedule_Q.front();Schedule_Q.pop_front();//get index from Queue
-        const forward_list<DFG_node::node_val>&child_list = 
+        const forward_list<DFG_node::node_val>&check_list = 
                                 par.check_list(V.at(cur_index));//use callback to get check_list,this is determine by what scheduler you use.
         
-        for(DFG::node_val n:child_list)
+        for(DFG::node_val n:check_list)
         {
             DFG::index chck_index = dfg->get_index(n);//check_list save  node_val, not index.so we need get index use method in dfg class.
             schedule_time[chck_index] = 

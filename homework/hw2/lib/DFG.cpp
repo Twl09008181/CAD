@@ -32,7 +32,7 @@ void DFG::show_DFG()const{
     {
        string parent = n.get_parent();
        string child = n.get_child();
-       cout<<"node : "<<n.get_val()<<" is type : "<<n.get_type()<<"\n"
+       cout<<"node : "<<n.get_val()<<" is type : "<<n.get_type_char()<<"\n"
        <<"child_list : "<<child<<" parent_list : "<<parent<<endl;
     }
 }
