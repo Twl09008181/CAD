@@ -1,5 +1,5 @@
 #include"UC_Schler.h"
-int ASAP_start_time(int dummy){return -1;}
+int ASAP_start_time(int dummy){return 0;}//更動input delay = 0之後,必須將ASAP的start從-1改回0
 int ALAP_start_time(int latency){return latency;}
 int get_degree_parent(const DFG_node&v){return v.get_parent_num();}
 int get_degree_child(const DFG_node&v){return v.get_child_num();}
@@ -22,7 +22,7 @@ vector<int> ncsch(DFG*dfg,UC_Schler par,int latency)
 {
     const vector<DFG_node>& V = dfg->get_node_vector();
     vector<int>degree(V.size(),-1);//according to different scheduler ways:ASAP/ASLA,degree will different.
-    vector<int>delay(V.size(),-1);//according to different operation,has different delay,ncsh designer must setting.
+    vector<int>delay(V.size(),0);//according to different operation,has different delay,ncsh designer must setting.
     vector<int>schedule_time(V.size(),par.start_time(latency));//callback function do determine the nodes with degree 0 start_time.
     forward_list<int>Schedule_Q;//use a forward_list to schedule
 
