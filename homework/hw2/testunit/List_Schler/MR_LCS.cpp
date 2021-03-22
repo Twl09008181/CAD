@@ -4,9 +4,9 @@
 #include<forward_list>
 #include<list>
 using namespace std;
-#include "./lib/DFG.h"
-#include "./lib/UC_schler.h"
-#include "./lib/List_Schler.h"
+#include "../../lib/DFG.h"
+#include "../../lib/UC_schler.h"
+#include "../../lib/List_Schler.h"
 
 
 DFG *get_DFG(char *file_name);
@@ -15,11 +15,27 @@ int add_num,mul_num;//resource 數
 int main(int argc,char*argv[])
 {   
     DFG *dfg = get_DFG(argv[1]);
+    const auto& V = dfg->get_node_vector();
+
+    vector<int>R{add_num,mul_num};
+    vector<int>Schedule = ML_RCS(dfg,R);//跑ML_RCS
+
+    //得到latency
+    int latency = 0;
+    for(auto o:dfg->get_output_index())
+        latency = max(Schedule.at(o),latency);
     
+    cout<<"latency = "<<latency<<endl;
+
     
+    //拿來做MR_LCS   看一下resource
+    cout<<"need "<<"resource :"<<endl;
     vector<int> resource = MR_LCS(dfg,7);
     for(auto r:resource)
         cout<<r<<" ";
+
+    
+
     return 0;
 }
 

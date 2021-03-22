@@ -6,7 +6,7 @@
 using namespace std;
 #include "../../lib/DFG.h"
 #include "../../lib/UC_schler.h"
-#include "../../lib/MR_LCS.h"
+#include "../../lib/List_Schler.h"
 
 
 DFG *get_DFG(char *file_name);
@@ -48,6 +48,14 @@ int main(int argc,char*argv[])
         cout<<endl;
     }
 
+    cout<<"if use ASAP : "<<endl;
+    vector<int>Schedule2 = ASAP(dfg);//跑ASAP
+    
+    latency = 0;
+    for(auto o:dfg->get_output_index())
+        latency = max(Schedule2.at(o),latency);
+    
+    cout<<"latency = "<<latency<<endl;
 
 
     return 0;
