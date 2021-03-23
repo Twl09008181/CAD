@@ -9,7 +9,6 @@
 using namespace std;
 
 
-bool is_schedule(const vector<DFG::index>&Output,const vector<int>&schedule);
 //Queue init
 struct working_node
 {

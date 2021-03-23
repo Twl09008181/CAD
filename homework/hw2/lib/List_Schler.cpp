@@ -1,8 +1,7 @@
 
 #include "List_Schler.h"
 
-
-bool is_schedule(const vector<DFG::index>&Output,const vector<int>&schedule)
+bool is_schedule_done(const vector<DFG::index>&Output,const vector<int>&schedule)
 {
     for(auto o:Output)
         if(schedule[o]==0)return false;//有一個output還沒被schedule到
