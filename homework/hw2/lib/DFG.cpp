@@ -35,16 +35,3 @@ void DFG::show_DFG()const{
     }
 }
 
-
-vector<DFG_node>DFG::get_input_vector()const
-{
-        vector<DFG_node>Input;Input.reserve(Input_index.size());
-        for(auto i:Input_index)Input.push_back(V.at(i));
-        return Input;
-}
-vector<DFG_node>DFG::get_output_vector()const
-{
-        vector<DFG_node>Output;Output.reserve(Output_index.size());
-        for(auto i:Output_index)Output.push_back(V.at(i));
-        return Output;
-}

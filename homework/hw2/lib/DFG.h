@@ -104,9 +104,7 @@ public:
     const DFG_node&get_node(index i)const{return V.at(i);}//enter index ,then return the DFG_node&
     index get_index(node_val v){return (Decode.find(v)!=Decode.end())? Decode[v]:-1;}//enter the DFG_node.val ,return the index in V
     
-    //some special function DFG has
-    vector<DFG_node>get_input_vector()const;//return input_vector
-    vector<DFG_node>get_output_vector()const;//return output_vector
+    //for find input/output rapidly
     const vector<index> &get_input_index()const{return Input_index;}//Input node's index in V
     const vector<index> &get_output_index()const{return Output_index;}//Output node's index in V
     int get_op_type_num()const{return op.size();}//return operation map type:frequency
