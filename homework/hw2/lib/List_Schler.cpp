@@ -49,7 +49,7 @@ vector<int>ML_RCS(DFG *dfg,vector<int>&resource)
     //step2 : setting degree,schedule_time  並由input端開始進行第一次schedule()-------------------------------
     const vector<DFG_node>& V = dfg->get_node_vector();
     vector<int>schedule_time(V.size(),0);//schedule的結果
-    vector<int>degree = get_degree(V,get_degree_parent);//set degree
+    vector<int>degree = get_degree_V(V,get_degree_parent);//get degree Vector
     //由input開始進行schedule,並將能放入ready_q的操作放入
     for(auto inpt_index:dfg->get_input_index())
         put_RQ(dfg,schedule_time,degree,0,inpt_index,Ready_Q);
@@ -140,7 +140,7 @@ vector<int>MR_LCS(DFG *dfg,int latency)
     //step2 : setting degree,schedule_time  並由input端開始進行第一次schedule()-------------------------------
     const vector<DFG_node>& V = dfg->get_node_vector();
     vector<int>schedule_time(V.size(),0);//schedule的結果
-    vector<int>degree = get_degree(V,get_degree_parent);//set degree
+    vector<int>degree = get_degree_V(V,get_degree_parent);//set degree
     //由input開始進行schedule,並將能放入ready_q的操作放入
     for(auto inpt_index:dfg->get_input_index())
         put_RQ(dfg,schedule_time,degree,0,inpt_index,Ready_Q);

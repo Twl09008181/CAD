@@ -12,7 +12,8 @@ int ALAP_start_time(int latency);
 
 int get_degree_parent(const DFG_node&v);//看parent方向的degree
 int get_degree_child(const DFG_node&v);//看child方向的degree
-vector<int>get_degree(const vector<DFG_node>&V,int(*f)(const DFG_node&v));
+vector<int>get_degree_V(const vector<DFG_node>&V,int(*f)(const DFG_node&v));
+vector<int>get_delay_V(const vector<DFG_node>&V);
 const forward_list<DFG_node::node_val>&get_child_list(const DFG_node&v);
 const forward_list<DFG_node::node_val>&get_parent_list(const DFG_node&v);
 
