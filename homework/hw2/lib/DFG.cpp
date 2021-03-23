@@ -6,14 +6,12 @@ void DFG::add_node(node_val n,DFG_node::operation_type t)
     if(Decode.find(n)==Decode.end()){
         Decode[n] = V.size();//加入map當中
         V.push_back({n,t});
-        if(t=='i')Input_index.push_back(V.size()-1);//未來可能用到
-        else if(t=='o')Output_index.push_back(V.size()-1);//未來可能用到
+        if(t=='i')Input_index.push_back(V.size()-1);//未來可能用到，在快速要找到degree = 0時會由input開始
+        else if(t=='o')Output_index.push_back(V.size()-1);//未來可能用到，在檢查schedule的時候時候去看output的degree就好了
 
-        else{//operation 
-            if(op.find(t)==op.end())//計算每種operation的出現次數
-                op[t] = 1;
-            else
-                op[t]++;
+        else{//operation counter,這可以用來當作跟source提供的硬體種類數量對照。(但會佔一些空間)
+            if(op.find(t)==op.end())//用來記錄有這個種類
+                op[t] = true;
         }
     }
     else{

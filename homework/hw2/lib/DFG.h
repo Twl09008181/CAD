@@ -18,17 +18,16 @@ public:
         :val{v},T{t}{}
     void add_child(node_val n){child.push_front(n);child_size++;}
     void add_parent(node_val n){parent.push_front(n);parent_size++;}
-    
     const forward_list<node_val>&get_child_list()const{return child;}
     const forward_list<node_val>&get_parent_list()const{return parent;}
+    //forward_list的size()是linear time,因此用變數紀錄比較有效率，使用時機:例如計算degree
     int get_child_num()const{return child_size;}
     int get_parent_num()const{return parent_size;}
-    
     node_val get_val()const{return val;}
-
-    
-    
     operation_type get_type_char()const{return T;}
+
+
+    //改硬體的特性改這邊-------------------------------------------------------------
     int get_type_index()const{
         switch (T)
         {
@@ -51,7 +50,7 @@ public:
         }
         return -1;
     }
-    //改硬體的delay改這邊
+    
     int get_delay()const{
         switch (T)
         {
@@ -64,7 +63,7 @@ public:
         }
         return -1;   
     }
-   
+   //改硬體的特性改這邊-------------------------------------------------------------
 private:
     node_val val;
     operation_type T;
@@ -73,6 +72,8 @@ private:
     int parent_size = 0;
     int child_size = 0;
 
+
+    //debuger-------------------------------------------------------------------------
     string get_child()const{return get_list(child);}
     string get_parent()const{return get_list(parent);}
     string get_list(const forward_list<node_val>&l)const
@@ -82,6 +83,7 @@ private:
             _l=_l + to_string(*it)+" ";
         return _l;
     }
+    //debuger-------------------------------------------------------------------------
 };
 
 
@@ -90,7 +92,7 @@ class DFG{
 public:
     using index = unsigned;
     using node_val = DFG_node::node_val;
-    using OP_type_counter = map<DFG_node::operation_type,int>;
+    
 
     //some basic graph method
     DFG(int n){V.reserve(n);}
@@ -107,11 +109,11 @@ public:
     vector<DFG_node>get_output_vector()const;//return output_vector
     const vector<index> &get_input_index()const{return Input_index;}//Input node's index in V
     const vector<index> &get_output_index()const{return Output_index;}//Output node's index in V
-    const OP_type_counter&get_op_type()const{return op;}//return operation map type:frequency
+    int get_op_type_num()const{return op.size();}//return operation map type:frequency
 
 private:
     map<node_val,index>Decode;
-    OP_type_counter op;
+    map<DFG_node::operation_type,bool> op;
     vector<DFG_node>V;
     vector<index> Input_index;
     vector<index> Output_index;

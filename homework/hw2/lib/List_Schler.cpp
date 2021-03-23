@@ -37,7 +37,7 @@ vector<int>ML_RCS(DFG *dfg,vector<int>&resource)
 {
     //step 0 : check 資源的數量對得上dfg當中操作的數量---------------------------------------------
     int type_num = resource.size();//取得operation(excluding 'i','o')的種類數
-    if(type_num!=dfg->get_op_type().size()){error_op_type_msg(dfg->get_op_type().size(),resource.size());exit(1);}//種類數不合
+    if(type_num!=dfg->get_op_type_num()){error_op_type_msg(dfg->get_op_type_num(),resource.size());exit(1);}//種類數不合
     //step 0 :-------------------------------------------------------------------------------------
 
     //step 1: setting Ready_Q & Working Q--------------------------------------------------------
@@ -113,7 +113,7 @@ vector<int>ML_RCS(DFG *dfg,vector<int>&resource)
 vector<int>MR_LCS(DFG *dfg,int latency)
 {
 
-    vector<int>resource(dfg->get_op_type().size(),1);//初始化為1
+    vector<int>resource(dfg->get_op_type_num(),1);//初始化每種硬體數量為1
 
     vector<int>ALAP_schedule = ALAP(dfg,latency);
 
@@ -128,7 +128,7 @@ vector<int>MR_LCS(DFG *dfg,int latency)
 
     //step 0 : check 資源的數量對得上dfg當中操作的數量---------------------------------------------
     int type_num = resource.size();//取得operation(excluding 'i','o')的種類數
-    if(type_num!=dfg->get_op_type().size()){error_op_type_msg(dfg->get_op_type().size(),resource.size());exit(1);}//種類數不合
+    if(type_num!=dfg->get_op_type_num()){error_op_type_msg(dfg->get_op_type_num(),resource.size());exit(1);}//種類數不合
     //step 0 :-------------------------------------------------------------------------------------
 
     //step 1: setting Ready_Q & Working Q--------------------------------------------------------
