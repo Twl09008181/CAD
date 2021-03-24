@@ -5,6 +5,7 @@ FLAG = -std=c++11
 LIBSRC += ../../lib/UC_Schler.cpp 
 LIBSRC += ../../lib/DFG.cpp
 LIBSRC += ../../lib/List_Schler.cpp
+LIBSRC += ../../lib/CS_Schler.cpp
 LIBOBJ = $(patsubst %.cpp,%.o,$(LIBSRC))
 H_dependency = $(patsubst %.cpp,%.h,$(LIBSRC))
 
