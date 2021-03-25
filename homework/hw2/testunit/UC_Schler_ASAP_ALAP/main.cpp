@@ -3,7 +3,7 @@
 #include<string>
 using namespace std;
 #include "../../lib/DFG.h"
-#include "../../lib/UC_schler.h"
+#include "../../lib/UC_Schler.h"
 
 
 DFG *get_DFG(char *file_name);

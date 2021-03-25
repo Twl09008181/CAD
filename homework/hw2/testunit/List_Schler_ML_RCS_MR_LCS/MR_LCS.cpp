@@ -5,7 +5,7 @@
 #include<list>
 using namespace std;
 #include "../../lib/DFG.h"
-#include "../../lib/List_schler.h"
+#include "../../lib/List_Schler.h"
 
 
 DFG *get_DFG(char *file_name);
