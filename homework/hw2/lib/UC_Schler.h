@@ -22,8 +22,11 @@ struct UC_Schler_par
 
 class UC_schler:public Schler{
 public:
-    UC_schler(DFG*dfg,int start_time = 0,bool ASAP = true)
-        :Schler(dfg,start_time,ASAP)
+    UC_schler(DFG*dfg)
+        :UC_schler(dfg,true,0)
+    {}
+    UC_schler(DFG*dfg,bool ASAP,int start_time)
+        :Schler(dfg,ASAP,start_time)
     {   
         if(ASAP)
             par = {get_child_list,ASAP_schedule_time};

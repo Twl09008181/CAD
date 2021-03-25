@@ -5,26 +5,25 @@
 #include "DFG.h"
 #include <vector>
 using namespace std;
+
+
 class Schler{    
 public:
-    Schler(int n,int init_time)
-        :degree{vector<int>(n,-1)},schedule_time{vector<int>(n,init_time)},delay{vector<int>(n,-1)}{}
-    Schler(DFG*dfg,int start_time = 0,bool degree_is_parent=true)
-        :Schler(dfg->get_node_vector().size(),start_time)
+    Schler(DFG*dfg)
+        : Schler(dfg,true,0)
+        {}
+    Schler(DFG*dfg,bool degree_is_parent,int start_time)
+        :_dfg{dfg}
     {
-        _dfg = dfg;
-        auto V = _dfg->get_node_vector(); 
-        if(degree_is_parent)
-            for(int i = 0;i<degree.size();i++)
-                degree[i] = V.at(i).get_parent_num();
-        else 
-            for(int i = 0;i<degree.size();i++)
-                degree[i] = V.at(i).get_child_num();
-        
-
-        for(int i = 0;i<dfg->get_node_vector().size();i++){
-            delay.at(i) = _dfg->get_node_vector().at(i).get_delay();
-        }
+        int n = dfg->get_node_vector().size();
+        schedule_time.reserve(n);
+        degree.reserve(n);
+        delay.reserve(n);
+        if(degree_is_parent){
+            set_degree_p(n);
+        }else {set_degree_c(n);}
+        set_time(n,start_time);
+        set_delay(n);
     }
     vector<int>Schedule_result(){return schedule_time;}
 protected:
@@ -32,5 +31,29 @@ protected:
     vector<int>degree;
     vector<int>delay;
     DFG*_dfg;
+
+private:
+    void set_degree_c(int n){
+        const auto&V = _dfg->get_node_vector();
+        for(int i = 0;i<n;i++)
+            degree.push_back(V.at(i).get_child_num());
+    }
+    void set_degree_p(int n)
+    {
+        const auto&V = _dfg->get_node_vector();
+        for(int i = 0;i<n;i++)
+            degree.push_back(V.at(i).get_parent_num());
+    }
+    void set_delay(int n)
+    {
+        const auto&V = _dfg->get_node_vector();
+        for(int i = 0;i<n;i++)
+            delay.push_back(V.at(i).get_delay());
+    }
+    void set_time(int n,int t)
+    {
+        for(int i = 0;i<n;i++)
+            schedule_time.push_back(t);
+    } 
 };
 #endif 

@@ -46,7 +46,7 @@ vector<int> ASAP(DFG*dfg){
 }
 
 vector<int> ALAP(DFG*dfg,int latency){
-    UC_schler SCH(dfg,latency,false);
+    UC_schler SCH(dfg,false,latency);
     SCH.init_Output();//ALAP要由Output端開始Schedule
     //start schedule
     while(!SCH.is_done())
