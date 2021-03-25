@@ -79,7 +79,7 @@ void List_Schler::dispatch_if(unsigned int type,int now_time,const vector<int>&A
         if(cd(ALAP_schedule.at(index),now_time))//slack = 0
         {
             if(!Resource_available(type))
-                resource.at(type)++;
+                resource->at(type)++;
             w_q_t.push_back({index,_dfg->get_node_vector().at(index).get_delay()});//放入working queue當中
             schedule_time[index] = now_time;//dispatch
             Recycle.push_back(index);

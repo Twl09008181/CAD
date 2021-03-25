@@ -23,7 +23,7 @@ public:
 
     List_Schler(vector<int>&RS,DFG  *dfg)
         :Schler{dfg},//schedule_time/delay_time/degree setting
-        resource{RS},
+        resource{&RS},
         W_Q{vector<W_Q_type>(RS.size(),W_Q_type{})},//working Q
         R_Q{vector<R_Q_type>(RS.size(),R_Q_type{})} //Ready Q
     {}
@@ -39,8 +39,8 @@ private:
     void wake_up(DFG::index,int time);//called by un_lock.
     void set_state_Ready(DFG::index i,unsigned int type){R_Q.at(type).push_front(i);}
     bool R_Q_is_empty(unsigned int type){return R_Q.at(type).empty();}
-    bool Resource_available(unsigned int type){return W_Q.at(type).size()<resource.at(type);}
-    vector<int>&resource;
+    bool Resource_available(unsigned int type){return W_Q.at(type).size()<resource->at(type);}
+    vector<int>*resource;
 };
 
 
