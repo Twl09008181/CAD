@@ -36,23 +36,22 @@ void UC_schler::init_Output()//由Input開始schedule
 vector<int> ASAP(DFG*dfg){
 
     UC_schler SCH(dfg);
-    SCH.init_Input();
+    SCH.init_Input();//ASAP要由Input端開始Schedule
     //start schedule
     while(!SCH.is_done())
     {
-        SCH.run();//只有一個Queue,有run就夠了
+        SCH.run();
     }
     return SCH.Schedule_result();
 }
 
 vector<int> ALAP(DFG*dfg,int latency){
     UC_schler SCH(dfg,latency,false);
-    SCH.init_Output();
-    
+    SCH.init_Output();//ALAP要由Output端開始Schedule
     //start schedule
     while(!SCH.is_done())
     {
-        SCH.run();//只有一個Queue,有run就夠了
+        SCH.run();
     }
     return SCH.Schedule_result();   
 }
