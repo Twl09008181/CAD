@@ -11,6 +11,8 @@ using namespace std;
 DFG *get_DFG(char *file_name);
 int add_num,mul_num;//resource 數
 
+int get_latency(const DFG*dfg ,const vector<int>&Schedule);
+
 int main(int argc,char*argv[])
 {   
     DFG *dfg = get_DFG(argv[1]);
@@ -23,13 +25,11 @@ int main(int argc,char*argv[])
     int latency = 0;
     for(auto o:dfg->get_output_index())
         latency = max(Schedule.at(o),latency);
-    
-    cout<<"latency = "<<latency<<endl;
 
-    
+    cout<<"latency = "<<latency<<endl;
     //拿來做MR_LCS   看一下resource
+    vector<int> resource = MR_LCS(dfg,latency);
     cout<<"need "<<"resource :"<<endl;
-    vector<int> resource = MR_LCS(dfg,7);
     for(auto r:resource)
         cout<<r<<" ";
 
