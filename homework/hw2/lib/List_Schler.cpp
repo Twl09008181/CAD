@@ -62,32 +62,30 @@ void List_Schler::dispatch(unsigned int type,int now_time)
     //ak-TK>0 && RQ不為空 註:C++ 11 list.size()是const method
     while(Resource_available(type) && !R_Q_is_empty(type))
     {   
-        DFG::index index = r_q_t.front();r_q_t.pop_front();//從R_Q當中取出
+        DFG::index index = r_q_t.front_index();r_q_t.pop_front();//從R_Q當中取出
         w_q_t.push_back({index,_dfg->get_node_vector().at(index).get_delay()});//放入working queue當中
         schedule_time[index] = now_time;
     }
 }
 
 
-void List_Schler::dispatch_if(unsigned int type,int now_time,const vector<int>&ALAP_schedule,bool(*cd)(int,int))
+void List_Schler::dispatch_if(unsigned int type,int now_time)
 {
     auto & r_q_t = R_Q.at(type);
     auto & w_q_t = W_Q.at(type);
     vector<int>Recycle;
-    for(auto index : r_q_t)
+
+    while(!r_q_t.empty())
     {   
-        if(cd(ALAP_schedule.at(index),now_time))//slack = 0
-        {
-            if(!Resource_available(type))
-                resource->at(type)++;
-            w_q_t.push_back({index,_dfg->get_node_vector().at(index).get_delay()});//放入working queue當中
-            schedule_time[index] = now_time;//dispatch
-            Recycle.push_back(index);
-        }
-        
+        if( r_q_t.front_critical()!=now_time)break;//slack!=0
+        auto index = r_q_t.front_index();
+        if(!Resource_available(type))
+            resource->at(type)++;
+        w_q_t.push_back({index,_dfg->get_node_vector().at(index).get_delay()});//放入working queue當中
+        schedule_time[index] = now_time;//dispatch
+        Recycle.push_back(index);
+        r_q_t.pop_front();
     }
-    for(auto i:Recycle)//在外部回收
-        r_q_t.remove(i);
 }
 
 
@@ -106,8 +104,10 @@ vector<int>ML_RCS(DFG *dfg,vector<int>&resource)
     int type_num = resource.size();//取得operation(excluding 'i','o')的種類數
     if(type_num!=dfg->get_op_type_num()){error_op_type_msg(dfg->get_op_type_num(),resource.size());exit(1);}//種類數不合
     
+    vector<int>criticality = ALAP(dfg,0);
+    
     //初始化SCH
-    List_Schler SCH(resource,dfg);
+    List_Schler SCH(resource,dfg,criticality);
     SCH.init_Input();//由input開始進行schedule,並將能放入ready_q的操作放入
     int l = 0;
     while(!SCH.is_done())
@@ -125,16 +125,15 @@ vector<int>ML_RCS(DFG *dfg,vector<int>&resource)
 vector<int>MR_LCS(DFG *dfg,int latency)
 {
     int type_num = dfg->get_op_type_num();
-    vector<int>resource(type_num,1);//初始化為1
+    vector<int>resource{1,1};//初始化為1
     vector<int>ALAP_schedule = ALAP(dfg,latency);
 
     //任何一個input的schedule時間必須小於0
     for(auto i:dfg->get_input_index())
         if(ALAP_schedule.at(i)<0)
             return {-1};//該latency無解
-    
         //初始化SCH
-    List_Schler SCH(resource,dfg);
+    List_Schler SCH(resource,dfg,ALAP_schedule);
     SCH.init_Input();//由input開始進行schedule,並將能放入ready_q的操作放入
     int l = 0;
     while(!SCH.is_done())
@@ -142,7 +141,7 @@ vector<int>MR_LCS(DFG *dfg,int latency)
         for(unsigned int tp = 0;tp < type_num;tp++)
             SCH.run(tp);//去執行 type = tp 的working_q當中的operation
         for(unsigned int tp = 0;tp < type_num;tp++)
-            SCH.dispatch_if(tp,l,ALAP_schedule,Urgent);
+            SCH.dispatch_if(tp,l);
          for(unsigned int tp = 0;tp<type_num;tp++)
            SCH.dispatch(tp,l);//由ready queue當中取出事件加入working queue
         l++;
