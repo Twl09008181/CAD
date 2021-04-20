@@ -1,12 +1,12 @@
 
 #include "QuineMcCluskey.hpp"
 #include <iostream>
-
+#include <iomanip>
 
 //helper function 
 inline bool can_be_merge(const Implicant&I1,const Implicant&I2);
 inline bool try_merge(Implicant_table &Col,std::vector<Implicant>&prime);
-
+std::ostream & operator<<(std::ostream& os, Implicant_table &table);
 
 
 
@@ -87,28 +87,20 @@ inline bool try_merge(Implicant_table &Col,std::vector<Implicant>&prime)
     Col.swap(Next_Col);
     return not_done;
 }
+//for debug
+std::ostream & operator<<(std::ostream& os, Implicant_table &table)
+{
+    os << std::setw(10) <<"Term value|"<<std::setw(5) << "Cover\n";
+    for(int i = 0;i < table.size();i++)
+    {
+        for(auto& term : table[i])
+            os << std::setw(10) <<term.first.get_val() <<"|" << std::setw(5) <<term.first.get_cover()<<"\n";
+        os << "\n";
+    }
+    return os;
+}
 
 
 
 
-
-// int main()
-// {
-//     Function F = {
-//         {0},     // has zero 1
-//         {1,2},    // has one 1 
-//         {3,9,12},  //has two 1
-//         {11,13,14},  //has three 1 
-//         {15} 
-//     };  //has four 1
-
-//     auto Prime = Prime_Generate(F);
-//     std::cout << "Prime implicants : " << std::endl;
-//     for(const auto &p : Prime)
-//     {
-//         std::cout << "val = " << p.get_val() << " , cover = " << p.get_cover() << std::endl;
-//     }
-
-//     return 0;
-// }
 
