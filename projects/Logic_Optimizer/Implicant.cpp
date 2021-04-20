@@ -45,7 +45,8 @@ std::ostream& operator<<(std::ostream &os, const std::vector<Implicant::type>&te
     return os;
 }
 
-////demo 
+//demo 
+// #include <set>
 // int main()
 // {
 //     std::vector<Implicant> imps= 
@@ -55,10 +56,21 @@ std::ostream& operator<<(std::ostream &os, const std::vector<Implicant::type>&te
 //         {9,6},           //this term can cover (9,11,13,15)
 //         {12,3}           ////this term can cover (12,13,14,15)
 //     };
+//     // for(const auto &imp:imps)
+//     // {
+//     //     auto terms = imp.get_cover_terms();
+//     //     std::cout << terms << std::endl;
+//     // }
+
+//     std::set<Implicant>Set;
 //     for(const auto &imp:imps)
 //     {
-//         auto terms = imp.get_cover_terms();
-//         std::cout << terms << std::endl;
+//         Set.insert(imp);
+//     }
+//     Set.insert(Implicant{12,3});
+//     for(auto imp:Set)
+//     {
+//         std::cout<<imp.val<<std::endl;
 //     }
 //     return 0;
 // }
