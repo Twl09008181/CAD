@@ -31,21 +31,24 @@ std::vector<Implicant::type> Implicant::get_cover_terms()const
     return terms;
 }
 
-std::ostream& operator<<(std::ostream &os, const std::vector<Implicant::type>&terms)
-{
-    os << "m(";
 
-    for(int i = 0; i < terms.size(); i++)
-    {
-        if(i!=0)
-            os << ",";
-        os << terms.at(i);
-    }
-    os << ")";
-    return os;
-}
+//demo
 
-//demo 
+// std::ostream& operator<<(std::ostream &os, const std::vector<Implicant::type>&terms)
+// {
+//     os << "m(";
+
+//     for(int i = 0; i < terms.size(); i++)
+//     {
+//         if(i!=0)
+//             os << ",";
+//         os << terms.at(i);
+//     }
+//     os << ")";
+//     return os;
+// }
+
+ 
 // #include <set>
 // int main()
 // {
