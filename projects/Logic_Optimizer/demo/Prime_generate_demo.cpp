@@ -1,5 +1,6 @@
 #include "../lib/QuineMcCluskey.hpp"
 #include "../lib/Implicant.hpp"
+#include "../lib/Function.hpp"
 #include <iostream>
 
 std::ostream& operator<<(std::ostream &os, const std::vector<Implicant::type>&terms)
@@ -51,6 +52,7 @@ int main()
         std::cout << cover_terms << std::endl;
     }
 
+    //Min_Cover(F2,Prime);
 
     return 0;
 }
