@@ -37,6 +37,7 @@ std::vector<Implicant> Prime_Generate(Function &f)//Input function , return Prim
 
 
 
+
 //----------------------------------------------Min_Cover part------------------------------------------------
 
 
@@ -45,31 +46,41 @@ std::vector<Implicant> Prime_Generate(Function &f)//Input function , return Prim
 std::vector<Implicant> Min_Cover(Function &f,std::vector<Implicant>&prime)
 {
 
-
-    //Step1 : create table  
-    //1. Min_term_vec
-    //2. Prime_vec
-    //3. Min_term_val -> index in Min_term_vec mapping
-    
     colum_table table{f,prime};
+    auto& ESPI = table.get_Essential_prime();//get essential implicant's index in std::vector<Implicant>&prime.
+    table.cover_terms_by_ESPI();//Step4 : cover min_term by essential implicant
 
-    //Step3 : get essential implicant , but sometimes we directly put it into SAT problem.
-    table.show_un_coverd();
-    auto& Essential = table.get_Essential_prime();
-    std::cout <<"Essential prime implicants index : ";
-    for(auto es:Essential)
-        std::cout << es << " ";
-    std::cout << std::endl;
+    //Step5 : Change to SAT problem find remain prime implicants to cover all minterms in f
+    size_t remain_prime_num = prime.size() - ESPI.size();
+    size_t max_bracket_num = f.size();
+    //convert to SAT
+    SAT sat{max_bracket_num,remain_prime_num};
+    auto un_coverd = table.get_un_converd_Min_term();//GET un_coverd min_terms
+    for(auto &m : un_coverd)
+    {
+                                                    //change each minterm into one bracket form.
+        SAT::bracket br;
+        br.reserve(m.get_prime_index().size());
+        for(auto p_i : m.get_prime_index())
+        {
+            br.push_back(p_i);
+        }
+        
+        sat.add_bracket(br);//add this min_term's bracket into SAT problem
+    }
 
+    auto sat_result = sat.min_cover_SAT();//use sat to solve this problem,return is index of implicants.
 
-    //Step4 : cover min_term by essential implicant
-    table.cover_terms_by_ESPI();
-    table.show_un_coverd();
+    //union ESPI and sat_result
+    std::vector<Implicant>Final_ans;
+    Final_ans.reserve(sat_result.size() + ESPI.size());
+    for(int i = 0;i < sat_result.size();i++)
+        Final_ans.push_back(prime.at(sat_result.at(i)));
 
-    //Step5 : Change to SAT problem find remain prime implicant to cover all minterms in f
+    for(int i = 0;i < ESPI.size();i++)
+        Final_ans.push_back(prime.at(ESPI.at(i)));
 
-
-
+    return Final_ans;
 }
 
 //----------------------------------------------Min_Cover part------------------------------------------------
