@@ -2,7 +2,7 @@
 #define Imp_hpp
 
 #include <vector>
-#include <iostream>
+
 class Implicant
 {
 public:

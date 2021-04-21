@@ -1,7 +1,7 @@
 
 #include "Implicant.hpp"
 #include <vector>
-#include <iostream>
+
 
 
 //gernerate_all_combination that used only power of 2 
