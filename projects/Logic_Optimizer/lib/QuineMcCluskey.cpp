@@ -132,7 +132,7 @@ inline bool try_merge(Implicant_table &Col,std::vector<Implicant>&prime)
                 prime.push_back(term1.first);
         }
     }
-    std::cout << Col << std::endl;//show table
+    //std::cout << Col << std::endl;//show table
     Col.swap(Next_Col);
     return not_done;
 }
