@@ -48,9 +48,9 @@ std::vector<Implicant> Min_Cover(Function &f,std::vector<Implicant>&prime)
 
     colum_table table{f,prime};
     auto& ESPI = table.get_Essential_prime();//get essential implicant's index in std::vector<Implicant>&prime.
-    table.cover_terms_by_ESPI();//Step4 : cover min_term by essential implicant
+    table.cover_terms_by_ESPI();//cover min_term by essential implicant
 
-    //Step5 : Change to SAT problem find remain prime implicants to cover all minterms in f
+    //Change to SAT problem find remain prime implicants to cover all minterms in f
     size_t remain_prime_num = prime.size() - ESPI.size();
     size_t max_bracket_num = f.size();
     //convert to SAT
