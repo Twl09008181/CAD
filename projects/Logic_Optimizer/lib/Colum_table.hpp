@@ -34,6 +34,7 @@ public:
     }
     void show_un_coverd()const;
     void cover_terms_by_ESPI();
+    std::vector<min_terms>get_un_converd_Min_term()const;
     const std::vector<unsigned int>& get_Essential_prime(){
         Find_Essential();
         return Essential_prime;
@@ -88,4 +89,12 @@ inline void colum_table:: cover_terms_by_ESPI()//use essential prime implicant t
     }
 }
 
+inline std::vector<min_terms> colum_table::get_un_converd_Min_term()const{
+    std::vector<min_terms> un_cover;
+    un_cover.reserve(Min_term_vec.size());
+    for(auto &m : Min_term_vec)
+        if(!m.is_covered())
+            un_cover.push_back(m);
+    return un_cover;
+}
 #endif
