@@ -1,14 +1,18 @@
 
 #include "QuineMcCluskey.hpp"
+#include "SAT.hpp"
+#include "Colum_table.hpp"
+#include "map"
 #include <iostream>
 #include <iomanip>
 
-//helper function 
+
+
+//----------------------------------------------Prime_Generate part------------------------------------------------
+using Implicant_table = std::vector<std::map <Implicant,bool>>;
 inline bool can_be_merge(const Implicant&I1,const Implicant&I2);
 inline bool try_merge(Implicant_table &Col,std::vector<Implicant>&prime);
 std::ostream & operator<<(std::ostream& os, Implicant_table &table);
-
-
 
 std::vector<Implicant> Prime_Generate(Function &f)//Input function , return Prime_implicants
 {
@@ -27,26 +31,60 @@ std::vector<Implicant> Prime_Generate(Function &f)//Input function , return Prim
 
     return prime;
 }
+//----------------------------------------------Prime_Generate part------------------------------------------------
 
-// std::vector<Implicant> Min_Cover(Function &f,std::vector<Implicant>&prime)
-// {
-//     //
-//     //
-//     //
-//     //we can use Implicant.get_cover_terms() to generate all cover by this term
 
-//     create colum_cover_table ;
-//     for each p_imp in prime:
-//         cover = p_imp.get_cover_terms();
-//         colum_cover_table.draw(cover);
+
+
+
+//----------------------------------------------Min_Cover part------------------------------------------------
+
+
+
+
+std::vector<Implicant> Min_Cover(Function &f,std::vector<Implicant>&prime)
+{
+
+
+    //Step1 : create table  
+    //1. Min_term_vec
+    //2. Prime_vec
+    //3. Min_term_val -> index in Min_term_vec mapping
     
-//     while(we can find EP):
-//         choose the essential prime implicant EP from colum_cover_table ;
-//         colum_cover_table.erase(EP);
+    colum_table table{f,prime};
 
-//     //Change to SAT problem find remain prime implicant to cover all minterms in f
-// }
+    //Step3 : get essential implicant , but sometimes we directly put it into SAT problem.
+    table.show_un_coverd();
+    auto& Essential = table.get_Essential_prime();
+    std::cout <<"Essential prime implicants index : ";
+    for(auto es:Essential)
+        std::cout << es << " ";
+    std::cout << std::endl;
 
+
+    //Step4 : cover min_term by essential implicant
+    table.cover_terms_by_ESPI();
+    table.show_un_coverd();
+
+    //Step5 : Change to SAT problem find remain prime implicant to cover all minterms in f
+
+
+
+}
+
+//----------------------------------------------Min_Cover part------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+//----------------------------------------------Prime_Generate helper function------------------------------------------------
 
 
 inline bool can_be_merge(const Implicant&I1,const Implicant&I2)
@@ -99,7 +137,7 @@ std::ostream & operator<<(std::ostream& os, Implicant_table &table)
     }
     return os;
 }
-
+//----------------------------------------------Prime_Generate helper function------------------------------------------------
 
 
 
