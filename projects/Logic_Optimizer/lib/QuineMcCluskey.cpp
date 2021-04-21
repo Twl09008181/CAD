@@ -10,8 +10,8 @@
 
 //----------------------------------------------Prime_Generate part------------------------------------------------
 using Implicant_table = std::vector<std::map <Implicant,bool>>;
-inline bool can_be_merge(const Implicant&I1,const Implicant&I2);
-inline bool try_merge(Implicant_table &Col,std::vector<Implicant>&prime);
+bool can_be_merge(const Implicant&I1,const Implicant&I2);
+bool try_merge(Implicant_table &Col,std::vector<Implicant>&prime);
 std::ostream & operator<<(std::ostream& os, Implicant_table &table);
 
 std::vector<Implicant> Prime_Generate(Function &f)//Input function , return Prime_implicants
@@ -98,7 +98,7 @@ std::vector<Implicant> Min_Cover(Function &f,std::vector<Implicant>&prime)
 //----------------------------------------------Prime_Generate helper function------------------------------------------------
 
 
-inline bool can_be_merge(const Implicant&I1,const Implicant&I2)
+bool can_be_merge(const Implicant&I1,const Implicant&I2)
 {
     if(I1.get_cover()!=I2.get_cover())return false;//different cover
 
@@ -107,7 +107,7 @@ inline bool can_be_merge(const Implicant&I1,const Implicant&I2)
     return ((diff)&(diff-1))==0;//diff is power of 2
 }
 
-inline bool try_merge(Implicant_table &Col,std::vector<Implicant>&prime)
+bool try_merge(Implicant_table &Col,std::vector<Implicant>&prime)
 {
     int max_num_of_one = Col.size();
     bool not_done = false;
