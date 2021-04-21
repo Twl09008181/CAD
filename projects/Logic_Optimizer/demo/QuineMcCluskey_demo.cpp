@@ -54,6 +54,7 @@ int main()
     std::cout <<"implicants : " << std::endl;
     for(auto& imp : ans)
     {
+        std::cout <<"val = "<<imp.get_val()<<" dash = " <<imp.get_cover() <<" can cover :";
         std::cout <<imp.get_cover_terms()<<std::endl;
     }
     
