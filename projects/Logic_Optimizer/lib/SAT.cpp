@@ -1,26 +1,39 @@
 #include "SAT.hpp"
-#include "vector"
-#include <iostream>
-
-void SAT_solver(int i,std::vector<bracket>&SAT,std::vector<bool*>&implicant,std::vector<int>&ans,std::vector<int>current)
+void SAT::SAT_solver(int i,std::vector<int>&ans,std::vector<int>current)
 {
 
-    if(i==implicant.size())//end 
+    if(i == literals.size()) 
     {   
-        if(evaulate_SAT(SAT))//if it can sove SAT
+        if(evaulate_SAT())//if it can sove SAT
         {
             if(ans.size() > current.size())//see whether this is a better  answer.
-                ans = current;
+                ans.swap(current);//swap is more efficient.
         }
     }
+
     else {
-        *implicant[i] = false;
-        SAT_solver(i+1,SAT,implicant,ans,current);//set implicant[i] = false
+        literals[i].val = false;    
+        SAT_solver(i+1,ans,current);//set li = false
         
-        *implicant[i] = true;
-        current.push_back(i+1);
-        SAT_solver(i+1,SAT,implicant,ans,current);//set implicant[i] = true
+        literals[i].val  = true;
+        current.push_back(literals[i].id);
+        SAT_solver(i+1,ans,current);//set li = true
     }
 }
 
+void SAT::add_bracket(const bracket &br)
+{
+    bracket new_br;
+    new_br.reserve(br.size());
 
+    for(auto l : br)
+    {
+        if(lit_id.find(l)==lit_id.end())//l is a new literal
+        {
+            lit_id.insert({l,literals.size()});
+            literals.push_back({l});
+        }
+        new_br.push_back(lit_id[l]);//put index of l in std::vector<literal>literals into bracket. used in bool SAT::evaulate_one_bracket(const bracket& br).
+    }
+    brackets.push_back(new_br);
+}
