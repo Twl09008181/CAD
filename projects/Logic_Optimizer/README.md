@@ -6,10 +6,15 @@
 * [Prime_generate_demo](#prime_generate_demo)
 * [SAT_demo](#sat_demo)   
 
-[Folder Structure](folder_structure)  
+[FolderStructure](#folderstructure)  
 * [Lib](#lib)
-* [demo](#demo_cpp) 
+* [demo](#demo_cpp)  
 
+[DataStructure](#datastructure) 
+* [Function](#function)   
+* [Implicant](#implicant)
+* [Prime_Implicant_Chart](#prime_implicant_chart)  
+* [SAT_interface](#sat_interface ) 
 
 A Lib base on   
 
@@ -32,7 +37,7 @@ check  [Implicant](#implicant)
 
 ### SAT_demo    
 
-## Folder_Structure    
+## FolderStructure    
 
 ### Lib  
   * `QuineMcCluskey.hpp : Final interface, Include Generate prime implicants/min cover. `
@@ -49,7 +54,7 @@ check  [Implicant](#implicant)
   * `SAT_demo.cpp `
 
 
-## Data Structure   
+## DataStructure   
 
 
 ### Function  
@@ -113,5 +118,5 @@ With cover , we can compare two implicants without iterating all characters and 
 ### Prime_Implicant_Chart
 
 
-### SAT interface 
+### SAT_interface 
 
