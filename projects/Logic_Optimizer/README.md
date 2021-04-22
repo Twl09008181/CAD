@@ -93,7 +93,7 @@ bool diff_one_bit(const Implicant&I1,const Implicant&I2)
     return ((diff)&(diff-1))==0;//diff is power of 2
 }
 ```
-With cover , we can compare two implicants without iterate all character, and fastly check.
+With cover , we can compare two implicants without iterating all character, and fastly check.
 
 
 
