@@ -13,6 +13,7 @@
 [DataStructure](#datastructure) 
 * [Function](#function)   
 * [Implicant](#implicant)
+* [Implicant_Combine_table](*implicant_combine_table)
 * [Prime_Implicant_Chart](#prime_implicant_chart)  
 * [SAT_interface](#sat_interface ) 
 
@@ -114,7 +115,22 @@ bool diff_one_bit(const Implicant&I1,const Implicant&I2)
 ```
 With cover , we can compare two implicants without iterating all characters and  check fastly.
 
+### Implicant_Combine_table  
 
+It is defined in  QuineMcCluskey.hpp 
+
+
+```
+using Implicant_Combine_table = std::vector<std::map <Implicant,bool>>;//use in phase 1 : find prime_implicants
+```
+
+<img src = "https://user-images.githubusercontent.com/52790122/115758701-0064d580-a3d2-11eb-9e72-431e2bf2e115.png" width = "500"> 
+
+I use std::map <Implicant,bool> for two reasons 
+```
+1. The new implicant durring combining may duplicate.   
+2. The implcant in table need a record to indentify whether it is  a prime implicant (*). 
+```
 
 ### Prime_Implicant_Chart
 
