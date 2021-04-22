@@ -43,7 +43,7 @@ int main()
         {15} 
     };  //has four 1
 
-    auto Prime = Prime_Generate(F2);
+    auto Prime = Prime_Generate(F2,true);
     std::cout << "Prime implicants : " << std::endl;
     for(const auto &p : Prime)
     {

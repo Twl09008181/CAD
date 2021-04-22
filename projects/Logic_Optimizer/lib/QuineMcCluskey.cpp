@@ -8,7 +8,7 @@ bool can_be_merge(const Implicant&I1,const Implicant&I2);
 bool try_merge(Implicant_Combine_table &Col,std::vector<Implicant>&prime);
 std::ostream & operator<<(std::ostream& os, Implicant_Combine_table &table);
 
-std::vector<Implicant> Prime_Generate(Function &f)//Input function , return Prime_implicants
+std::vector<Implicant> Prime_Generate(Function &f,bool show_procedure)//Input function , return Prime_implicants
 {
     std::vector<Implicant> prime;
     //init 
@@ -20,6 +20,8 @@ std::vector<Implicant> Prime_Generate(Function &f)//Input function , return Prim
     bool not_done = true;
     while(not_done)
     {
+        if(show_procedure)std::cout << table << std::endl;//show table
+
         not_done = try_merge(table,prime);
     }
 
@@ -33,7 +35,7 @@ std::vector<Implicant> Prime_Generate(Function &f)//Input function , return Prim
 
 
 //----------------------------------------------Min_Cover part------------------------------------------------
-
+std::vector<int>Petrick_Method(Prime_Implicant_Chart &table,size_t remain_prime_num,size_t max_bracket_num);
 
 
 
@@ -42,17 +44,32 @@ std::vector<Implicant> Min_Cover(Function &f,std::vector<Implicant>&prime)
 
     Prime_Implicant_Chart table{f,prime};
     auto& ESPI = table.get_Essential_prime();//get essential implicant's index in std::vector<Implicant>&prime.
-    table.cover_terms_by_ESPI();//cover min_term by essential implicant
+    table.cover_terms_by_ESPI();//cover min_term by essential implicants.
 
-    //Change to SAT problem find remain prime implicants to cover all minterms in f
-    size_t remain_prime_num = prime.size() - ESPI.size();
-    size_t max_bracket_num = f.size();
-    //convert to SAT
+    auto P_M_sol = Petrick_Method(table,prime.size()-ESPI.size(),f.size());
+    
+    //union ESPI and Petrick_Method's answer
+    std::vector<Implicant>Final_ans;
+
+    Final_ans.reserve(P_M_sol.size() + ESPI.size());
+
+    for(int i = 0;i < P_M_sol.size();i++)Final_ans.push_back(prime.at(P_M_sol.at(i)));
+
+    for(int i = 0;i < ESPI.size();i++)Final_ans.push_back(prime.at(ESPI.at(i)));
+
+    return Final_ans;
+}
+
+
+
+
+std::vector<int>Petrick_Method(Prime_Implicant_Chart &table,size_t remain_prime_num,size_t max_bracket_num)
+{
+
     SAT sat{max_bracket_num,remain_prime_num};
-    auto un_coverd = table.get_un_converd_Min_term();//GET un_coverd min_terms
-    for(auto &m : un_coverd)
+    for(auto &m : table.get_un_converd_Min_term())
     {
-                                                    //change each minterm into one bracket form.
+        //change each minterm into one bracket form.                                          
         SAT::bracket br;
         br.reserve(m.get_prime_index().size());
         for(auto p_i : m.get_prime_index())
@@ -63,25 +80,9 @@ std::vector<Implicant> Min_Cover(Function &f,std::vector<Implicant>&prime)
         sat.add_bracket(br);//add this min_term's bracket into SAT problem
     }
 
-    auto sat_result = sat.min_cover_SAT();//use sat to solve this problem,return is index of implicants.
-
-    //union ESPI and sat_result
-    std::vector<Implicant>Final_ans;
-    Final_ans.reserve(sat_result.size() + ESPI.size());
-    for(int i = 0;i < sat_result.size();i++)
-        Final_ans.push_back(prime.at(sat_result.at(i)));
-
-    for(int i = 0;i < ESPI.size();i++)
-        Final_ans.push_back(prime.at(ESPI.at(i)));
-
-    return Final_ans;
+    return sat.min_cover_SAT();//use sat to solve this problem.each element in return is a prime_implicant's index. 
 }
-
 //----------------------------------------------Min_Cover part------------------------------------------------
-
-
-
-
 
 
 
@@ -126,7 +127,6 @@ bool try_merge(Implicant_Combine_table &Col,std::vector<Implicant>&prime)
                 prime.push_back(term1.first);
         }
     }
-    //std::cout << Col << std::endl;//show table
     Col.swap(Next_Col);
     return not_done;
 }
