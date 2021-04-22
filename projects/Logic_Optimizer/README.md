@@ -13,7 +13,7 @@
 [DataStructure](#datastructure) 
 * [Function](#function)   
 * [Implicant](#implicant)
-* [Implicant_Combine_table](#implicantcombinetable)
+* [Implicant_Combine_table](#implicant_combine_table)
 * [Prime_Implicant_Chart](#prime_implicant_chart)  
 * [SAT_interface](#sat_interface ) 
 
