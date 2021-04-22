@@ -6,9 +6,9 @@
 * [Prime_generate_demo](#prime_generate_demo)
 * [SAT_demo](#sat_demo)   
 
-[Folder Structure](folderstructure)  
+[Folder Structure](folder_structure)  
 * [Lib](#lib)
-* [demo](#demo) 
+* [demo](#demo_cpp) 
 
 
 A Lib base on   
@@ -32,7 +32,7 @@ check  [Implicant](#implicant)
 
 ### SAT_demo    
 
-## Folder Structure    
+## Folder_Structure    
 
 ### Lib  
   * `QuineMcCluskey.hpp : Final interface, Include Generate prime implicants/min cover. `
@@ -42,7 +42,7 @@ check  [Implicant](#implicant)
   * `SAT.hpp  : A kernel part in min cover used to implement Petrick's method.`
 
 
-### demo 
+### demo_cpp 
   * `QuineMcCluskey_demo.cpp  `
   * `Prime_generate_demo.cpp  `
   * `Prime_Implicant_Chart_demo.cpp `
