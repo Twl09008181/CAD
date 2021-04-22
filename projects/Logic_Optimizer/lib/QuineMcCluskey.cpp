@@ -1,24 +1,18 @@
-
 #include "QuineMcCluskey.hpp"
-#include "SAT.hpp"
-#include "Prime_Implicant_Chart.hpp"
-#include "map"
-#include <iostream>
-#include <iomanip>
+
 
 
 
 //----------------------------------------------Prime_Generate part------------------------------------------------
-using Implicant_table = std::vector<std::map <Implicant,bool>>;
 bool can_be_merge(const Implicant&I1,const Implicant&I2);
-bool try_merge(Implicant_table &Col,std::vector<Implicant>&prime);
-std::ostream & operator<<(std::ostream& os, Implicant_table &table);
+bool try_merge(Implicant_Combine_table &Col,std::vector<Implicant>&prime);
+std::ostream & operator<<(std::ostream& os, Implicant_Combine_table &table);
 
 std::vector<Implicant> Prime_Generate(Function &f)//Input function , return Prime_implicants
 {
     std::vector<Implicant> prime;
     //init 
-    Implicant_table table(f.size());
+    Implicant_Combine_table table(f.size());
     for(int i = 0; i < f.size(); i++)
         for(auto &terms : f.at(i))
             table.at(i).insert({terms,false});
@@ -107,11 +101,11 @@ bool can_be_merge(const Implicant&I1,const Implicant&I2)
     return ((diff)&(diff-1))==0;//diff is power of 2
 }
 
-bool try_merge(Implicant_table &Col,std::vector<Implicant>&prime)
+bool try_merge(Implicant_Combine_table &Col,std::vector<Implicant>&prime)
 {
     int max_num_of_one = Col.size();
     bool not_done = false;
-    Implicant_table Next_Col(max_num_of_one);
+    Implicant_Combine_table Next_Col(max_num_of_one);
 
     for(int i = 0;i < max_num_of_one - 1; i++)//merge Col[i],Col[i+1]
     {
@@ -137,7 +131,7 @@ bool try_merge(Implicant_table &Col,std::vector<Implicant>&prime)
     return not_done;
 }
 //for debug
-std::ostream & operator<<(std::ostream& os, Implicant_table &table)
+std::ostream & operator<<(std::ostream& os, Implicant_Combine_table &table)
 {
     os << std::setw(10) <<"Term value|"<<std::setw(5) << "Cover\n";
     for(int i = 0;i < table.size();i++)
