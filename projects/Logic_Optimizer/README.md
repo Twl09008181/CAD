@@ -21,6 +21,21 @@ I optimize the prime_implicant finding part,And it can be validated in simple wa
 
 ## Folder Structure    
 
+### Lib  
+  * `QuineMcCluskey.hpp : Final interface, Include Generate prime implicants/min cover. `
+  * `Function.hpp       : A input format for kernel lib.`
+  * `Implicant.hpp      : A kernel part in Generate prime implicants.`
+  * `Prime_Implicant_Chart.hpp  : A kernel part in min cover.`
+  * `SAT.hpp  : A kernel part in min cover used to implement Petrick's method.`
+
+
+### demo 
+  * `QuineMcCluskey_demo.cpp  `
+  * `Prime_generate_demo.cpp  `
+  * `Prime_Implicant_Chart_demo.cpp `
+  * `SAT_demo.cpp `
+
+
 ## Data Structure   
 
 
