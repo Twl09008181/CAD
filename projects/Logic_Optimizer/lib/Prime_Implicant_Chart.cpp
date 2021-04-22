@@ -1,8 +1,8 @@
-#include "Colum_table.hpp"
+#include "Prime_Implicant_Chart.hpp"
 
 
 
-void colum_table::init_table(const Function &f,const std::vector<Implicant>&prime)
+void Prime_Implicant_Chart::init_table(const Function &f,const std::vector<Implicant>&prime)
 {
     //f contain the min_terms we need to cover
     //but f groups min_terms according to the num_of_ones in each min_term.
@@ -30,7 +30,7 @@ void colum_table::init_table(const Function &f,const std::vector<Implicant>&prim
 
 
 
-void colum_table::draw(const std::vector<Implicant>&prime)
+void Prime_Implicant_Chart::draw(const std::vector<Implicant>&prime)
 {
     //scan prime , and draw the table 
     for(size_t p_i = 0; p_i < prime.size(); p_i++)

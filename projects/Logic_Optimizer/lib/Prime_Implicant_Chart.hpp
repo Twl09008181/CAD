@@ -1,6 +1,6 @@
 
-#ifndef Colum_table_H
-#define Colum_table_H
+#ifndef Prime_Implicant_Chart_H
+#define Prime_Implicant_Chart_H
 
 #include "Implicant.hpp"
 #include "Function.hpp"
@@ -24,9 +24,9 @@ private:
     std::vector<int> prime_index;
 };
 
-class colum_table{
+class Prime_Implicant_Chart{
 public:
-    colum_table(const Function &f,const std::vector<Implicant>&prime)
+    Prime_Implicant_Chart(const Function &f,const std::vector<Implicant>&prime)
     {
         init_table(f,prime);
         draw(prime);
@@ -49,7 +49,7 @@ private:
     std::vector<unsigned int> Essential_prime;//save the index of prime which is essential.
 };
 
-inline void colum_table::Find_Essential()
+inline void Prime_Implicant_Chart::Find_Essential()
 {
     if(Essential_prime.empty())//only when Essential_prime is empty,we do a search.
     {
@@ -60,23 +60,8 @@ inline void colum_table::Find_Essential()
         }
     }
 }
-inline void colum_table::show_un_coverd()const
-{
-    for(auto &m : Min_term_vec)
-    {
-        if(!m.is_covered())
-        {
-            std::cout << "m" << m.get_val() << " : ";
-            for(const auto &p : m.get_prime_index())
-            {
-                std::cout << p << " ";
-            }
-            std::cout << std::endl;
-        }
-    }
-}
 
-inline void colum_table:: cover_terms_by_ESPI()//use essential prime implicant to cover terms.
+inline void Prime_Implicant_Chart:: cover_terms_by_ESPI()//use essential prime implicant to cover terms.
 {
     Find_Essential();
     
@@ -89,7 +74,7 @@ inline void colum_table:: cover_terms_by_ESPI()//use essential prime implicant t
     }
 }
 
-inline std::vector<min_terms> colum_table::get_un_converd_Min_term()const{
+inline std::vector<min_terms> Prime_Implicant_Chart::get_un_converd_Min_term()const{
     std::vector<min_terms> un_cover;
     un_cover.reserve(Min_term_vec.size());
     for(auto &m : Min_term_vec)

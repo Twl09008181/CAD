@@ -1,7 +1,7 @@
 
 #include "QuineMcCluskey.hpp"
 #include "SAT.hpp"
-#include "Colum_table.hpp"
+#include "Prime_Implicant_Chart.hpp"
 #include "map"
 #include <iostream>
 #include <iomanip>
@@ -46,7 +46,7 @@ std::vector<Implicant> Prime_Generate(Function &f)//Input function , return Prim
 std::vector<Implicant> Min_Cover(Function &f,std::vector<Implicant>&prime)
 {
 
-    colum_table table{f,prime};
+    Prime_Implicant_Chart table{f,prime};
     auto& ESPI = table.get_Essential_prime();//get essential implicant's index in std::vector<Implicant>&prime.
     table.cover_terms_by_ESPI();//cover min_term by essential implicant
 

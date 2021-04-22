@@ -1,4 +1,4 @@
-#include "../lib/Colum_table.hpp"
+#include "../lib/Prime_Implicant_Chart.hpp"
 #include "../lib/Function.hpp"
 #include "../lib/Implicant.hpp"
 #include "../lib/QuineMcCluskey.hpp"
@@ -8,7 +8,21 @@
 #include <iostream>
 
 
-
+void show_un_coverd(const std::vector<min_terms> &table)
+{
+    for(auto &m : table)
+    {
+        if(!m.is_covered())
+        {
+            std::cout << "m" << m.get_val() << " : ";
+            for(const auto &p : m.get_prime_index())
+            {
+                std::cout << p << " ";
+            }
+            std::cout << std::endl;
+        }
+    }
+}
 std::ostream& operator<<(std::ostream &os, const std::vector<Implicant::type>&terms)
 {
     os << "m(";
@@ -43,8 +57,8 @@ int main()
 
     //------------------------------------------Phase 2------------------------------------------
     std::cout << "\ncreate table : \n";
-    colum_table table{fnct,Prime};
-    table.show_un_coverd();std::cout <<"\n";
+    Prime_Implicant_Chart table{fnct,Prime};
+    show_un_coverd(table.get_un_converd_Min_term());std::cout <<"\n";
 
     auto &ESPI = table.get_Essential_prime();//index in Prime
     std::cout << "ESPI index : ";
@@ -54,8 +68,7 @@ int main()
 
     std::cout << "After use ESPI to cover terms : \n";
     table.cover_terms_by_ESPI();
-    table.show_un_coverd();
-    
+    show_un_coverd(table.get_un_converd_Min_term());std::cout <<"\n";
 
     
     std::cout << "\nUse SAT to choose remain prime implicants\n";
