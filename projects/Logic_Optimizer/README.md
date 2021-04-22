@@ -1,11 +1,24 @@
 # Logic Optimizer using Quine-McCluskey and Petrick_Method  
 
+[Demo](#demo)
+* [QuineMcCluskey_demo](#quinemccluskey_demo)
+* [Prime_Implicant_Chart_demo](#prime_implicant_chart_demo)
+* [Prime_generate_demo](#prime_generate_demo)
+* [SAT_demo](#sat_demo)   
+
+[Folder Structure](folderstructure)  
+* [Lib](#lib)
+* [demo](#demo) 
+
+
 A Lib base on   
 
 1. [Quine–McCluskey algorithm](https://en.wikipedia.org/wiki/Quine%E2%80%93McCluskey_algorithm)     
 2. [Petrick's method](https://en.wikipedia.org/wiki/Petrick%27s_method) 
 
-I optimize the prime_implicant finding part,And it can be validated in simple way.
+I optimize the prime_implicant finding part,And it can be validated in simple way.  
+check  [Implicant](#implicant) 
+
 
 ## How to Use 
 
@@ -64,7 +77,7 @@ Constructor
        :val{v},cover{dash_part}
       {}
 ```
-Important data member
+Important data members
 
 ```
 type val; // val without consider dash_part, for example :  0b10-1  means   0b1001 + 0b00-0(dash-part), and val = 0b1001 = 9  
