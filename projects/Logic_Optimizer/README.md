@@ -83,6 +83,19 @@ Implicants can combine each other iff
 1. differ by 1 bit.    
 2. has same dash part : cover must be same. 
 
+```
+bool diff_one_bit(const Implicant&I1,const Implicant&I2)
+{
+    if(I1.get_cover()!=I2.get_cover())return false;//different cover
+
+    unsigned int diff = I1.get_val() ^ I2.get_val();//do xor , we can get difference
+    
+    return ((diff)&(diff-1))==0;//diff is power of 2
+}
+```
+With cover , we can compare two implicants without iterate all character, and fastly check.
+
+
 
 ### Prime_Implicant_Chart
 
