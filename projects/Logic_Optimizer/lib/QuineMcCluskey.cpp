@@ -93,7 +93,7 @@ std::vector<int>Petrick_Method(Prime_Implicant_Chart &table,size_t remain_prime_
 //----------------------------------------------Prime_Generate helper function------------------------------------------------
 
 
-bool can_be_merge(const Implicant&I1,const Implicant&I2)
+bool diff_one_bit(const Implicant&I1,const Implicant&I2)
 {
     if(I1.get_cover()!=I2.get_cover())return false;//different cover
 
@@ -114,7 +114,7 @@ bool try_merge(Implicant_Combine_table &Col,std::vector<Implicant>&prime)
         {
             for(auto &term2 : Col[i+1])
             {
-                if(can_be_merge(term1.first,term2.first))
+                if(diff_one_bit(term1.first,term2.first))
                 {
                     unsigned int cover = term1.first.get_val() ^ term2.first.get_val() + term1.first.get_cover();//cover = diff + cover1
                     Next_Col[i].insert({Implicant{term1.first.get_val(),cover},false});//Next_Col insert,and set it as false.
