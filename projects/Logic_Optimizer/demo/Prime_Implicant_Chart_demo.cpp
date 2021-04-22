@@ -8,7 +8,7 @@
 #include <iostream>
 
 
-void show_un_coverd(const std::vector<min_terms> &table)
+void show_un_coverd(const std::vector<min_term> &table)
 {
     for(auto &m : table)
     {
