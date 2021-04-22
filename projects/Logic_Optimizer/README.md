@@ -13,7 +13,7 @@
 [DataStructure](#datastructure) 
 * [Function](#function)   
 * [Implicant](#implicant)
-* [Implicant_Combine_table](*implicant_combine_table)
+* [Implicant_Combine_table](*implicantcombinetable)
 * [Prime_Implicant_Chart](#prime_implicant_chart)  
 * [SAT_interface](#sat_interface ) 
 
@@ -115,7 +115,7 @@ bool diff_one_bit(const Implicant&I1,const Implicant&I2)
 ```
 With cover , we can compare two implicants without iterating all characters and  check fastly.
 
-### Implicant_Combine_table  
+### ImplicantCombinetable  
 
 It is defined in  QuineMcCluskey.hpp 
 
