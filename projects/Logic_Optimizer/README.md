@@ -115,6 +115,12 @@ bool diff_one_bit(const Implicant&I1,const Implicant&I2)
 ```
 With cover , we can compare two implicants without iterating all characters and  check fastly.
 
+
+**We can use cover and the val to combination all min term this implicant can cover**. 
+See [Implicant.cpp-Implicant::get_cover_terms()](https://github.com/Twl09008181/CAD/blob/main/projects/Logic_Optimizer/lib/Implicant.cpp)
+
+
+
 ### Implicant_Combine_table  
 
 It is defined in  QuineMcCluskey.hpp 
@@ -134,6 +140,58 @@ I use std::map <Implicant,bool> for two reasons
 
 ### Prime_Implicant_Chart
 
+This Chart describe the relation between min_terms in function and prime implicants which be generated in phase1. 
+<img src = https://user-images.githubusercontent.com/52790122/115893054-5f862100-a48a-11eb-94db-50159f5edbef.png width = "500">
+
+```
+With Implicant::get_cover_terms(),It is easy to list the minterms that can be cover of each prime implicant.    
+```
+See [Prime_Implicant_Chart::draw](https://github.com/Twl09008181/CAD/blob/main/projects/Logic_Optimizer/lib/Prime_Implicant_Chart.cpp)
+
+
+
+Three important data members 
+```
+1. std::vector<min_term>Min_term_vec;//each minterm save the prime_index that can cover this min_term.
+2. std::vector<std::vector<int>>Prime_vec;//each prime save the Min_term index that can be cover by this prime.
+3. std::map<unsigned int ,unsigned int>term_index_mapping;
+
+//term_val in function f is not start from 1, and it may be unorderd,so we need a way to record the min_term's index.
+//use to map min_term's value into index in Min_term_vec
+```
+
+The Prime_Implicant_Chart's constructor do two things. 
+    
+```
+Prime_Implicant_Chart(const Function &f,const std::vector<Implicant>&prime)
+    {
+        init_table(f,prime);
+        draw(prime);
+    }
+```
+
+1. `init_table:construct all minterms and prime implicants in this table` 
+2. `draw : draw the relations between minterms and prime implicants using Implicant::get_cover_terms()`
+
+After constructor , important member functions are        
+
+```
+private:    
+1. Find_Essential()   : scan the table and return the Essential prime implicants (ESPIs)    It execute only when std::vector<unsigned int> Essential_prime is empty.    
+
+public:   
+2. cover_terms_by_ESPI()  : automatically call Find_Essential() and marked the min_terms coverd by these ESPIs.
+3. const std::vector<unsigned int>& get_Essential_prime(); :automatically call Find_Essential() and return Essentail prime implicants. 
+4. std::vector<min_term>get_un_converd_Min_term()const  : Return the min_terms which are not marked.    
+```
+
+
+
+After calling `cover_terms_by_ESPI() ` , we can use   `get_un_converd_Min_term() ` to get the remain minterms and change it to SAT problem(Petrick's method).
+
+
 
 ### SAT_interface 
+
+
 
