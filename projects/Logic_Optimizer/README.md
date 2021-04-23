@@ -192,6 +192,76 @@ After calling `cover_terms_by_ESPI() ` , we can use   `get_un_converd_Min_term()
 
 
 ### SAT_interface 
+After `cover_terms_by_ESPI() `,the next step is solve the SAT problem of the remaining minterms.    
+In this example  
+
+<img src = "https://user-images.githubusercontent.com/52790122/115896343-e7215f00-a48d-11eb-9321-f6050293cc90.png"> 
+
+P0 : m(4,12)
+P1 : m(8,9,10,11)
+P2 : m(8,10,12,14)  
+P3 : m(10,11,14,15) 
+
+P0 and P3 are ESPIs. we need choose both of them.     
+
+SO,the problem covering m8,m10,m11,m12 can be changed into the problem 
+(P1 + P2) * (P1 + P2 + P3) * (P1 + P3) * (P0 + P2 ) = 1  
+
+So,We need to  
+1. generate all the bracket   
+2. Use backtracking to solve this problem    
+
+In order to generate all the bracket and make the same literal's val(true/false) can be change at same time "in all brackets",we need to use global vars.    
+Instead of using global vars, SAT use  `std::vector<literal>literals;` to store literals(P0,P1,P2,P3) and `using bracket = std::vector<int>;` to store the litera's index in `std::vector<literal>literals;`
+
+The interface: 
+```  
+void SAT::add_bracket(const bracket &br)
+{
+    bracket new_br;
+    new_br.reserve(br.size());
+
+    for(auto l : br)
+    {
+        if(lit_id.find(l)==lit_id.end())//l is a new literal
+        {
+            lit_id.insert({l,literals.size()});
+            literals.push_back({l});
+        }
+        new_br.push_back(lit_id[l]);//put index of l in std::vector<literal>literals into bracket. used in bool SAT::evaulate_one_bracket(const bracket& br).
+    }
+    brackets.push_back(new_br);
+}
+```   
+
+How to use this interface :  
+[std::vector<int>Petrick_Method(Prime_Implicant_Chart &table,size_t remain_prime_num,size_t max_bracket_num)](https://github.com/Twl09008181/CAD/blob/main/projects/Logic_Optimizer/lib/QuineMcCluskey.cpp)
+
+```
+std::vector<int>Petrick_Method(Prime_Implicant_Chart &table,size_t remain_prime_num,size_t max_bracket_num)
+{
+
+    SAT sat{max_bracket_num,remain_prime_num};
+    for(auto &m : table.get_un_converd_Min_term())
+    {
+        //change each minterm into one bracket form.                                          
+        SAT::bracket br;
+        br.reserve(m.get_prime_index().size());
+        for(auto p_i : m.get_prime_index())
+        {
+            br.push_back(p_i);
+        }
+        
+        sat.add_bracket(br);//add this min_term's bracket into SAT problem
+    }
+
+    return sat.min_cover_SAT();//use sat to solve this problem.each element in return is a prime_implicant's index. 
+}
+```
+
+
+
+
 
 
 
