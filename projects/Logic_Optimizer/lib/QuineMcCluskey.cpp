@@ -8,13 +8,16 @@ bool can_be_merge(const Implicant&I1,const Implicant&I2);
 bool try_merge(Implicant_Combine_table &Col,std::vector<Implicant>&prime);
 std::ostream & operator<<(std::ostream& os, Implicant_Combine_table &table);
 
-std::vector<Implicant> Prime_Generate(Function &f,bool show_procedure)//Input function , return Prime_implicants
+std::vector<Implicant> Prime_Generate(const Function &f,const Function &dont_care,bool show_procedure)//Input function , return Prime_implicants
 {
     std::vector<Implicant> prime;
     //init 
-    Implicant_Combine_table table(f.size());
-    for(int i = 0; i < f.size(); i++)
+    Implicant_Combine_table table(f.size()+dont_care.size());
+    for(int i = 0; i < f.size(); i++)//i means have i ones.
         for(auto &terms : f.at(i))
+            table.at(i).insert({terms,false});
+    for(int i = 0; i < dont_care.size(); i++)
+        for(auto &terms : dont_care.at(i))
             table.at(i).insert({terms,false});
     //start run merge
     bool not_done = true;
@@ -39,7 +42,7 @@ std::vector<int>Petrick_Method(Prime_Implicant_Chart &table,size_t remain_prime_
 
 
 
-std::vector<Implicant> Min_Cover(Function &f,std::vector<Implicant>&prime)
+std::vector<Implicant> Min_Cover(const Function &f,std::vector<Implicant>&prime)
 {
 
     Prime_Implicant_Chart table{f,prime};

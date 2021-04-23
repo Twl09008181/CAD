@@ -20,12 +20,12 @@ using Implicant_Combine_table = std::vector<std::map <Implicant,bool>>;//use in 
 #include <iomanip>
 
 //-----------------------------Interface-------------------------------------------
-std::vector<Implicant> Prime_Generate(Function &f,bool show_procedure = false);//phase 1 : Input function , return Prime_implicants.
-std::vector<Implicant> Min_Cover(Function &f,std::vector<Implicant>&prime);//phase 2 : Use smallest prime_implicants to cover function f,and return those implicants. 
-inline std::vector<Implicant>  QuineMcCluskey(Function&f)
+std::vector<Implicant> Prime_Generate(const Function &f,const Function &dont_care = {},bool show_procedure = false);//phase 1 : Input function , return Prime_implicants.
+std::vector<Implicant> Min_Cover(const Function &f,std::vector<Implicant>&prime);//phase 2 : Use smallest prime_implicants to cover function f,and return those implicants. 
+inline std::vector<Implicant>  QuineMcCluskey(const Function&f,const Function&dont_care = {})
 {
-    std::vector<Implicant> prime = Prime_Generate(f);//generate prime implicants
-    return Min_Cover(f,prime);//cover
+    std::vector<Implicant> prime = Prime_Generate(f,dont_care);//generate prime implicants
+    return Min_Cover(f,prime);//cover , only passing f without passing dont_care
 }
 
 #endif

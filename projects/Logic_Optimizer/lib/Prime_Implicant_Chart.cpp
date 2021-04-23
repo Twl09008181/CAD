@@ -35,12 +35,14 @@ void Prime_Implicant_Chart::draw(const std::vector<Implicant>&prime)
     //scan prime , and draw the table 
     for(size_t p_i = 0; p_i < prime.size(); p_i++)
     {
-        auto cover_Lst = prime.at(p_i).get_cover_terms();
+        auto cover_Lst = prime.at(p_i).get_cover_terms();  //cover_Lst include don't care.....
         for(auto &term : cover_Lst)
         {
-            auto t_i = term_index_mapping[term];//get term_index from mapping
-            Min_term_vec.at(t_i).push(p_i);//term point to this prime 
-            Prime_vec.at(p_i).push_back(t_i);//prime  point to this term 
+            if(term_index_mapping.find(term)!=term_index_mapping.end()){//  if it is not don't care term,it is in term_index_mapping.
+                auto t_i = term_index_mapping[term];//get term_index from mapping
+                Min_term_vec.at(t_i).push(p_i);//term point to this prime 
+                Prime_vec.at(p_i).push_back(t_i);//prime  point to this term
+            } 
         }
     }
 }
