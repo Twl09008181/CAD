@@ -50,6 +50,8 @@ public:
         Find_Essential();
         return Essential_prime;
     }
+    const std::vector<min_term>& get_min_term_vec()const{return Min_term_vec;}
+    const std::vector<std::vector<int>>& get_Prime_vec()const{return Prime_vec;}
 private:
     void init_table(const Function &f,const std::vector<Implicant>&prime);
     void draw(const std::vector<Implicant>&prime);

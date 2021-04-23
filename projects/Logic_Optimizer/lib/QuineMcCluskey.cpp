@@ -38,7 +38,7 @@ std::vector<Implicant> Prime_Generate(const Function &f,const Function &dont_car
 
 
 //----------------------------------------------Min_Cover part------------------------------------------------
-std::vector<int>Petrick_Method(Prime_Implicant_Chart &table,size_t remain_prime_num,size_t max_bracket_num);
+std::vector<int>Petrick_Method(Prime_Implicant_Chart &table);
 
 
 
@@ -49,7 +49,7 @@ std::vector<Implicant> Min_Cover(const Function &f,std::vector<Implicant>&prime)
     auto& ESPI = table.get_Essential_prime();//get essential implicant's index in std::vector<Implicant>&prime.
     table.cover_terms_by_ESPI();//cover min_term by essential implicants.
 
-    auto P_M_sol = Petrick_Method(table,prime.size()-ESPI.size(),f.size());
+    auto P_M_sol = Petrick_Method(table);
     
     //union ESPI and Petrick_Method's answer
     std::vector<Implicant>Final_ans;
@@ -66,9 +66,10 @@ std::vector<Implicant> Min_Cover(const Function &f,std::vector<Implicant>&prime)
 
 
 
-std::vector<int>Petrick_Method(Prime_Implicant_Chart &table,size_t remain_prime_num,size_t max_bracket_num)
+std::vector<int>Petrick_Method(Prime_Implicant_Chart &table)
 {
-
+    size_t remain_prime_num = table.get_Prime_vec().size() - table.get_Essential_prime().size();
+    size_t max_bracket_num = table.get_un_converd_Min_term().size();
     SAT sat{max_bracket_num,remain_prime_num};
     for(auto &m : table.get_un_converd_Min_term())
     {
