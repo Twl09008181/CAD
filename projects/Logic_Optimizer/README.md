@@ -204,8 +204,8 @@ P3 : m(10,11,14,15)
 
 P0 and P3 are ESPIs. we need choose both of them.     
 
-SO,the problem covering m8,m10,m11,m12 can be changed into the problem 
-(P1 + P2) * (P1 + P2 + P3) * (P1 + P3) * (P0 + P2 ) = 1  
+SO,the problem covering m8 can be changed into the problem 
+(P1 + P2) = 1   
 
 So,We need to  
 1. generate all the bracket   
