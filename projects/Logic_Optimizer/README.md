@@ -76,7 +76,7 @@ Function F = {
 <img src = "https://user-images.githubusercontent.com/52790122/115750138-6baaa980-a3ca-11eb-869d-bb69d74b4107.png" width = "200">
 
 ### Implicant   
-A kernel part in Generate prime implicant by combine.    
+A kernel part in generating prime implicant by combination.    
 
 Constructor 
 ```
@@ -113,7 +113,7 @@ bool diff_one_bit(const Implicant&I1,const Implicant&I2)
     return ((diff)&(diff-1))==0;//diff is power of 2
 }
 ```
-With cover , we can compare two implicants without iterating all characters and  check fastly.
+With cover , we can compare two implicants without iterating all characters and  can check fastly.
 
 
 **We can use cover and the val to combination all min term this implicant can cover**. 
@@ -140,7 +140,7 @@ I use std::map <Implicant,bool> for two reasons
 
 ### Prime_Implicant_Chart
 
-This Chart describe the relation between min_terms in function and prime implicants which be generated in phase1. 
+This chart describe the relations between min_terms in function and prime implicants which be generated in phase1. 
 <img src = https://user-images.githubusercontent.com/52790122/115893054-5f862100-a48a-11eb-94db-50159f5edbef.png width = "500">
 
 ```
