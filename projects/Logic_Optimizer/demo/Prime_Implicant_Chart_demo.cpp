@@ -38,16 +38,22 @@ std::ostream& operator<<(std::ostream &os, const std::vector<Implicant::type>&te
 }
 int main()
 {
-    Function fnct = {
-        {0},     // has zero 1
-        {4,8},    // has one 1 
-        {5,6,9,10},  //has two 1
-        {7,13},  //has three 1 
-        {15} 
-    };  //has four 1
+    Function F = {
+            {},     // has zero 1 , if empty,still need a {}
+            {4,8},    // has one 1 
+            {10,12},  //has two 1
+            {11},  //has three 1 
+            {15} };  //has four 1
+
+    Function Dont_care = {
+            {},
+            {},
+            {9},
+            {14}  
+    };
 
     ////------------------------------------------Phase 1------------------------------------------
-    auto Prime = Prime_Generate(fnct);
+    auto Prime = Prime_Generate(F,Dont_care);
 
     std::cout << "prime implicants are" << std::endl;
     for(int i = 0;i < Prime.size(); i++)
@@ -57,7 +63,7 @@ int main()
 
     //------------------------------------------Phase 2------------------------------------------
     std::cout << "\ncreate table : \n";
-    Prime_Implicant_Chart table{fnct,Prime};
+    Prime_Implicant_Chart table{F,Prime};
     show_un_coverd(table.get_un_converd_Min_term());std::cout <<"\n";
 
     auto &ESPI = table.get_Essential_prime();//index in Prime
@@ -73,7 +79,7 @@ int main()
     
     std::cout << "\nUse SAT to choose remain prime implicants\n";
     size_t remain_prime_num = Prime.size() - ESPI.size();
-    size_t max_bracket_num = fnct.size();
+    size_t max_bracket_num = F.size();
     //convert to SAT
     SAT sat{max_bracket_num,remain_prime_num};
 

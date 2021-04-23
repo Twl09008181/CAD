@@ -19,12 +19,12 @@ std::ostream& operator<<(std::ostream &os, const std::vector<Implicant::type>&te
     return os;
 }
 
-bool validation(Function &fnct,std::vector<Implicant>&imps)
+bool validation(Function &F,std::vector<Implicant>&imps)
 {
     std::map<int,bool>check;
-    for(int i = 0;i < fnct.size(); i++)
+    for(int i = 0;i < F.size(); i++)
     {
-        for(auto &term:fnct[i])
+        for(auto &term:F[i])
             check.insert({term,false});
     }
 
@@ -41,15 +41,21 @@ bool validation(Function &fnct,std::vector<Implicant>&imps)
 }
 int main()
 {
-    Function fnct = {
-        {0},     // has zero 1
-        {4,8},    // has one 1 
-        {5,6,9,10},  //has two 1
-        {7,13},  //has three 1 
-        {15} 
-    };  //has four 1
+    Function F = {
+            {},     // has zero 1 , if empty,still need a {}
+            {4,8},    // has one 1 
+            {10,12},  //has two 1
+            {11},  //has three 1 
+            {15} };  //has four 1
 
-    auto ans = QuineMcCluskey(fnct);
+    Function Dont_care = {
+            {},
+            {},
+            {9},
+            {14}  
+    };
+
+    auto ans = QuineMcCluskey(F);
 
     std::cout <<"implicants : " << std::endl;
     for(auto& imp : ans)
@@ -58,7 +64,7 @@ int main()
         std::cout <<imp.get_cover_terms()<<std::endl;
     }
     
-    if(validation(fnct,ans))
+    if(validation(F,ans))
     {
         std::cout << "ans is correct!!" << std::endl;
     }
@@ -68,7 +74,7 @@ int main()
 
 
     ans.pop_back();//if we delete a implicant,then answer will be error.
-    if(validation(fnct,ans))
+    if(validation(F,ans))
     {
         std::cout << "ans is correct!!" << std::endl;
     }

@@ -36,14 +36,19 @@ int main()
 
 
     Function F2 = {
-        {0},     // has zero 1
-        {4,8},    // has one 1 
-        {5,6,9,10},  //has two 1
-        {7,13},  //has three 1 
-        {15} 
-    };  //has four 1
+            {},     // has zero 1 , if empty,still need a {}
+            {4,8},    // has one 1 
+            {10,12},  //has two 1
+            {11},  //has three 1 
+            {15} };  //has four 1
 
-    auto Prime = Prime_Generate(F2,true);
+    Function Dont_care = {
+            {},
+            {},
+            {9},
+            {14}  
+    };
+    auto Prime = Prime_Generate(F2,Dont_care,true);
     std::cout << "Prime implicants : " << std::endl;
     for(const auto &p : Prime)
     {
