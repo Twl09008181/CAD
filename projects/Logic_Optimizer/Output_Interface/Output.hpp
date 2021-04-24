@@ -22,7 +22,7 @@ inline std::string Implicant_to_str(unsigned int val,unsigned int cover,unsigned
     int j = 26 - Fan_in;
     for(int i = 0; i < Fan_in; i++)
     {
-        if((val_str.at(j+1)=='1' || cover_str.at(j+i)=='0')&&!ans.empty()){
+        if((val_str.at(j+i)=='1' || cover_str.at(j+i)=='0')&&!ans.empty()){
             ans = ans + '*';
         }
         if(val_str.at(j+i) == '1'){ //positive literal   
