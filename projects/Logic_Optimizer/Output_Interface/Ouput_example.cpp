@@ -6,6 +6,10 @@
 #include <sstream>
 #include <iostream>
 
+int get_fan_in(const Function &F,const Function&Dont_care)
+{
+    return std::max(F.size(),Dont_care.size()) - 1;
+}
 int main()
 {
     Function F = {
@@ -21,10 +25,9 @@ int main()
             {14}  
     };
 
-    int Fan_in = std::max(F.size(),Dont_care.size()) - 1;
+    int Fan_in = get_fan_in(F,Dont_care);
     auto implicants = QuineMcCluskey(F,Dont_care);
     
-
     std::ostringstream os;
     for(const auto&imp : implicants)
     {
