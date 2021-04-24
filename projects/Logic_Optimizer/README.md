@@ -62,7 +62,7 @@ check  [Implicant](#implicant)
 ### Function  
 
 A standard function format in all Lib  
-``` using Function = std::vector<std::vector<int>>; ``` 
+``` using Function = std::vector<std::vector<unsigned int>>; ``` 
 
 The format example:
 ```
@@ -232,7 +232,7 @@ void SAT::add_bracket(const bracket &br)
     }
     brackets.push_back(new_br);
 }
-```   
+```
 
 How to use this interface :  
 [std::vector<int>Petrick_Method(Prime_Implicant_Chart &table,size_t remain_prime_num,size_t max_bracket_num)](https://github.com/Twl09008181/CAD/blob/main/projects/Logic_Optimizer/lib/QuineMcCluskey.cpp)
