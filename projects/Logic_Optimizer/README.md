@@ -334,8 +334,7 @@ std::vector<int>Petrick_Method(Prime_Implicant_Chart &table,size_t remain_prime_
 
 
 
-Use ![image-20210424232759546](C:\Users\TimWeiLee\AppData\Roaming\Typora\typora-user-images\image-20210424232759546.png)	
-
+![image](https://user-images.githubusercontent.com/52790122/115964091-52823400-a555-11eb-8be6-2d1bd1a57cc7.png)
 ```
     Function F = {
             {},     // has zero 1 , if empty,still need a {}
@@ -411,8 +410,7 @@ m(15,11,14,10)
 
 ```
 
-![image-20210424232610346](C:\Users\TimWeiLee\AppData\Roaming\Typora\typora-user-images\image-20210424232610346.png)
-
+![image](https://user-images.githubusercontent.com/52790122/115964104-5e6df600-a555-11eb-9f3c-5da48a30447f.png)
 ### Prime_Implicant_Chart_demo
 
 ```
@@ -447,8 +445,7 @@ The final ans is :
 p2 p0 p3
 ```
 
-![image-20210424232643171](C:\Users\TimWeiLee\AppData\Roaming\Typora\typora-user-images\image-20210424232643171.png)
-
+![image](https://user-images.githubusercontent.com/52790122/115964108-6332aa00-a555-11eb-85a5-9379f941c437.png)
 ### SAT_demo    
 
 ```
