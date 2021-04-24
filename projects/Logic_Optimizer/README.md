@@ -95,15 +95,6 @@ print(implicants2,Fan_in2);
 
 
 
-## Demo    
-
-### QuineMcCluskey_demo
-
-### Prime_Implicant_Chart_demo
-
-### Prime_generate_demo  
-
-### SAT_demo    
 
 ## FolderStructure    
 
@@ -325,6 +316,15 @@ std::vector<int>Petrick_Method(Prime_Implicant_Chart &table,size_t remain_prime_
 }
 ```
 
+## Demo    
+
+### QuineMcCluskey_demo
+
+### Prime_Implicant_Chart_demo
+
+### Prime_generate_demo  
+
+### SAT_demo    
 
 
 
