@@ -50,8 +50,8 @@ and [Output_Interface](https://github.com/Twl09008181/CAD/tree/main/projects/Log
 
 
 ### HowToUse 
- 
- 
+
+
 Main.cpp has two example in [src](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/src) 
 ```
 $ make
@@ -120,7 +120,7 @@ print(implicants2,Fan_in2);
 ### Input_Interface 
  * `Input.hpp` 
  * `Input_example.cpp` 
- 
+
 ### Output_Interface 
  * `Output.hpp` 
  * `Output_example.cpp` 
@@ -332,16 +332,182 @@ std::vector<int>Petrick_Method(Prime_Implicant_Chart &table,size_t remain_prime_
 
 ## Demo    
 
-### QuineMcCluskey_demo
 
-### Prime_Implicant_Chart_demo
+
+Use ![image-20210424232759546](C:\Users\TimWeiLee\AppData\Roaming\Typora\typora-user-images\image-20210424232759546.png)	
+
+```
+    Function F = {
+            {},     // has zero 1 , if empty,still need a {}
+            {4,8},    // has one 1 
+            {10,12},  //has two 1
+            {11},  //has three 1 
+            {15} };  //has four 1
+
+    Function Dont_care = {
+            {},
+            {},
+            {9},
+            {14}  
+    };
+```
+
+
 
 ### Prime_generate_demo  
 
+```
+$ make NAME=Prime_generate_demo
+```
+
+```
+$ ./Prime_generate_demo.exe
+
+Term value|Cover
+
+         4|    0
+         8|    0
+
+         9|    0
+        10|    0
+        12|    0
+
+        11|    0
+        14|    0
+
+        15|    0
+
+Term value|Cover
+
+         4|    8
+         8|    1
+         8|    2
+         8|    4
+
+         9|    2
+        10|    1
+        10|    4
+        12|    2
+
+        11|    4
+        14|    1
+
+Term value|Cover
+
+         8|    3
+         8|    6
+
+        10|    5
+        
+Prime implicants :
+val = 4 , cover = 8
+m(12,4)
+val = 8 , cover = 3
+m(11,9,10,8)
+val = 8 , cover = 6
+m(14,10,12,8)
+val = 10 , cover = 5
+m(15,11,14,10)
+
+```
+
+![image-20210424232610346](C:\Users\TimWeiLee\AppData\Roaming\Typora\typora-user-images\image-20210424232610346.png)
+
+### Prime_Implicant_Chart_demo
+
+```
+$ make NAME=Prime_Implicant_Chart_demo
+```
+
+```
+$ ./Prime_Implicant_Chart_demo.exe
+prime implicants are
+0 : m(12,4)
+1 : m(11,9,10,8)
+2 : m(14,10,12,8)
+3 : m(15,11,14,10)
+
+create table :
+m4 : 0
+m8 : 1 2
+m10 : 1 2 3
+m12 : 0 2
+m11 : 1 3
+m15 : 3
+
+ESPI index : 0 3
+
+After use ESPI to cover terms :
+m8 : 1 2
+
+
+Use SAT to choose remain prime implicants
+choose 2
+The final ans is :
+p2 p0 p3
+```
+
+![image-20210424232643171](C:\Users\TimWeiLee\AppData\Roaming\Typora\typora-user-images\image-20210424232643171.png)
+
 ### SAT_demo    
 
+```
+$ make NAME=SAT_demo
+```
 
 
 
+```
+std::vector<SAT::bracket> brs = {
+        {1,6},   //(p1+p6)
+        {6,7},   //(p6+p7)
+        {6},     //(p6)
+        {2,3,4}, //(p2+p3+p4)
+        {3,5},   //(p3+p5)
+        {4},    //(p4)
+        {5,7}   //(p5+p7)
+    };
+```
 
+
+
+```
+the minimum solution is :
+p6 = 1
+p4 = 1
+p5 = 1
+```
+
+
+
+### QuineMcCluskey_demo
+
+```
+    Function F = {
+            {},     // has zero 1 , if empty,still need a {}
+            {4,8},    // has one 1 
+            {10,12},  //has two 1
+            {11},  //has three 1 
+            {15} };  //has four 1
+
+    Function Dont_care = {
+            {},
+            {},
+            {9},
+            {14}  
+    };
+```
+
+```
+$ make NAME=QuineMcCluskey_demo
+```
+
+```
+$ ./QuineMcCluskey_demo.exe
+implicants :
+val = 8 dash = 6 can cover :m(14,10,12,8)
+val = 4 dash = 8 can cover :m(12,4)
+val = 10 dash = 5 can cover :m(15,11,14,10)
+ans is correct!!
+```
 
