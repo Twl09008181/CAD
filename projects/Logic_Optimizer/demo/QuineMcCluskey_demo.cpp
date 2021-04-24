@@ -55,7 +55,7 @@ int main()
             {14}  
     };
 
-    auto ans = QuineMcCluskey(F);
+    auto ans = QuineMcCluskey(F,Dont_care);
 
     std::cout <<"implicants : " << std::endl;
     for(auto& imp : ans)
