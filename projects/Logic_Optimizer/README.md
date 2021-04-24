@@ -42,6 +42,55 @@ and [Output_Interface](https://github.com/Twl09008181/CAD/tree/main/projects/Log
 
 
 ## How to Use 
+ 
+ 
+Main.cpp has two example in [src](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/src) 
+```
+$ make
+g++  -std=c++11 -c lib/Implicant.cpp -o lib/Implicant.o
+g++  -std=c++11 -c lib/QuineMcCluskey.cpp -o lib/QuineMcCluskey.o
+g++  -std=c++11 -c lib/Prime_Implicant_Chart.cpp -o lib/Prime_Implicant_Chart.o
+g++  -std=c++11 -c lib/SAT.cpp -o lib/SAT.o
+g++  -std=c++11 lib/Implicant.o lib/QuineMcCluskey.o lib/Prime_Implicant_Chart.o lib/SAT.o main.cpp -o main
+```
+
+```
+$ ./main.exe
+(a*!d)+(b*!c*!d)+(a*c)
+
+(!a*!b*!c*!d)+(b*d)+(b*c)+(a*!c*d)+(a*c*!d)
+```
+
+### The Flow 
+
+If you have don't care : (Example1)   
+```
+ //---------------------------------------------------INPUT------------------------------------------------------------
+ unsigned int Fan_in  = 4;
+ std::string F_str = "(!a*b*!c*!d)+(a*!b*!c*!d)+(a*!b*c*!d)+(a*!b*c*d)+(a*b*!c*!d)+(a*b*c*d)";
+ std::string Dont_Care_str = "(a*!b*!c*d)+(a*b*c*!d)";
+ Function F = get_function(F_str,4);
+ Function Dont_Care = get_function(Dont_Care_str,4);
+ ////---------------------------------------------------QuineMcCluskey------------------------------------------------------------
+ auto implicants = QuineMcCluskey(F,Dont_Care);
+ 
+ ///---------------------------------------------------Output-------------------------------------------------------------------
+ print(implicants,Fan_in);
+ 
+```
+
+NO Don't care Example (Example2) 
+```
+unsigned int Fan_in2 = 4;
+std::string F2_str = "(!a*!b*!c*!d)+(!a*b*!c*d)+(!a*b*c*!d)+(a*!b*!c*d)+(a*!b*c*!d)+(a*b*!c*d)+(a*b*c*!d)+(a*b*c*d)+(!a*b*c*d)";
+Function F2 = get_function(F2_str,4);
+
+auto implicants2 = QuineMcCluskey(F2);
+
+print(implicants2,Fan_in2);
+```
+
+
 
 ## Demo    
 
