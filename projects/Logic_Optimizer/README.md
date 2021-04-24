@@ -1,13 +1,9 @@
 # Logic Optimizer using Quine-McCluskey and Petrick_Method  
 
 [Introduction](#introduction) 
-
-
-[Demo](#demo)
-* [QuineMcCluskey_demo](#quinemccluskey_demo)
-* [Prime_Implicant_Chart_demo](#prime_implicant_chart_demo)
-* [Prime_generate_demo](#prime_generate_demo)
-* [SAT_demo](#sat_demo)   
+* [I/O Interface](#i_o_interface)
+* [Lib Architecture](#libarchitecture)
+* [How to Use](#howtouse)
 
 [FolderStructure](#folderstructure)  
 * [Lib](#lib)
@@ -20,6 +16,13 @@
 * [Prime_Implicant_Chart](#prime_implicant_chart)  
 * [SAT_interface](#sat_interface ) 
 
+[Lib Demo](#demo)
+* [QuineMcCluskey_demo](#quinemccluskey_demo)
+* [Prime_Implicant_Chart_demo](#prime_implicant_chart_demo)
+* [Prime_generate_demo](#prime_generate_demo)
+* [SAT_demo](#sat_demo)   
+
+
 ## Introduction 
 A Lib base on   
 
@@ -29,19 +32,19 @@ A Lib base on
 I optimize the prime_implicant finding part,And it can be validated in simple way.  
 check  [Implicant](#implicant) 
 
-###  I/O interface 
+###  I_O_Interface 
 
 <img src = https://user-images.githubusercontent.com/52790122/115953634-454a5280-a51f-11eb-9b02-a12536271a8c.png width = "200">
 
 You can use your own I/O interface if you want.I write example of both, check  [Input_Interface](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/Input_Interface) 
 and [Output_Interface](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/Output_Interface)
 
-### Lib Architecture   
+### LibArchitecture   
 <img src = "https://user-images.githubusercontent.com/52790122/115954047-66ac3e00-a521-11eb-8f24-b06034b312ce.png">
 
 
 
-## How to Use 
+### HowToUse 
  
  
 Main.cpp has two example in [src](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/src) 
