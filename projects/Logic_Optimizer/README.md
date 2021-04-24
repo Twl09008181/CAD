@@ -6,8 +6,13 @@
 * [How to Use](#howtouse)
 
 [FolderStructure](#folderstructure)  
+* [Input_Interface](#input_interface)
+* [Output_Interface](#output_interface)
 * [Lib](#lib)
 * [demo](#demo_cpp)  
+* makefile   
+* main.cpp
+
 
 [DataStructure](#datastructure) 
 * [Function](#function)   
@@ -112,6 +117,13 @@ print(implicants2,Fan_in2);
   * `Prime_Implicant_Chart_demo.cpp `
   * `SAT_demo.cpp `
 
+### Input_Interface 
+ * `Input.hpp` 
+ * `Input_example.cpp` 
+ 
+### Output_Interface 
+ * `Output.hpp` 
+ * `Output_example.cpp` 
 
 ## DataStructure   
 
@@ -198,7 +210,9 @@ I use std::map <Implicant,bool> for two reasons
 ### Prime_Implicant_Chart
 
 This chart describe the relations between min_terms in function and prime implicants which be generated in phase1. 
-<img src = https://user-images.githubusercontent.com/52790122/115893054-5f862100-a48a-11eb-94db-50159f5edbef.png width = "500">
+
+<img src = https://user-images.githubusercontent.com/52790122/115963565-71cb9200-a552-11eb-89b0-63c93ca500d4.png width = "500">
+
 
 ```
 With Implicant::get_cover_terms(),It is easy to list the minterms that can be cover of each prime implicant.    
