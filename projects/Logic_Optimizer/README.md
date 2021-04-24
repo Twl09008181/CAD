@@ -77,8 +77,8 @@ If you have don't care : (Example1)
  unsigned int Fan_in  = 4;
  std::string F_str = "(!a*b*!c*!d)+(a*!b*!c*!d)+(a*!b*c*!d)+(a*!b*c*d)+(a*b*!c*!d)+(a*b*c*d)";
  std::string Dont_Care_str = "(a*!b*!c*d)+(a*b*c*!d)";
- Function F = get_function(F_str,4);
- Function Dont_Care = get_function(Dont_Care_str,4);
+ Function F = get_function(F_str,Fan_in);
+ Function Dont_Care = get_function(Dont_Care_str,Fan_in);
  ////---------------------------------------------------QuineMcCluskey------------------------------------------------------------
  auto implicants = QuineMcCluskey(F,Dont_Care);
  
@@ -91,7 +91,7 @@ NO Don't care Example (Example2)
 ```
 unsigned int Fan_in2 = 4;
 std::string F2_str = "(!a*!b*!c*!d)+(!a*b*!c*d)+(!a*b*c*!d)+(a*!b*!c*d)+(a*!b*c*!d)+(a*b*!c*d)+(a*b*c*!d)+(a*b*c*d)+(!a*b*c*d)";
-Function F2 = get_function(F2_str,4);
+Function F2 = get_function(F2_str,Fan_in2);
 
 auto implicants2 = QuineMcCluskey(F2);
 
