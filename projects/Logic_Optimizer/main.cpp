@@ -1,5 +1,5 @@
 #include "./lib/QuineMcCluskey.hpp"
-#include "./Input_interface/Input.hpp"
+#include "./Input_Interface/Input.hpp"
 #include "./Output_Interface/Output.hpp"
 
 #include <string>
