@@ -350,7 +350,8 @@ std::vector<int>Petrick_Method(Prime_Implicant_Chart &table,size_t remain_prime_
 }
 ```
 
-## Demo    
+## Tests 
+[tests](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/tests) 
 
 
 
@@ -373,14 +374,9 @@ std::vector<int>Petrick_Method(Prime_Implicant_Chart &table,size_t remain_prime_
 
 
 
-### Prime_generate_demo  
+### Prime_generate  
 
 ```
-$ make NAME=Prime_generate_demo
-```
-
-```
-$ ./Prime_generate_demo.exe
 
 Term value|Cover
 
@@ -431,14 +427,12 @@ m(15,11,14,10)
 ```
 
 ![image](https://user-images.githubusercontent.com/52790122/115964104-5e6df600-a555-11eb-9f3c-5da48a30447f.png)
-### Prime_Implicant_Chart_demo
+### Prime_Implicant_Chart
+
+
 
 ```
-$ make NAME=Prime_Implicant_Chart_demo
-```
 
-```
-$ ./Prime_Implicant_Chart_demo.exe
 prime implicants are
 0 : m(12,4)
 1 : m(11,9,10,8)
@@ -466,11 +460,9 @@ p2 p0 p3
 ```
 
 ![image](https://user-images.githubusercontent.com/52790122/115964108-6332aa00-a555-11eb-85a5-9379f941c437.png)
-### SAT_demo    
+### SAT   
 
-```
-$ make NAME=SAT_demo
-```
+
 
 
 
@@ -497,7 +489,7 @@ p5 = 1
 
 
 
-### QuineMcCluskey_demo
+### QuineMcCluskey
 
 ```
     Function F = {
@@ -515,12 +507,9 @@ p5 = 1
     };
 ```
 
-```
-$ make NAME=QuineMcCluskey_demo
-```
 
 ```
-$ ./QuineMcCluskey_demo.exe
+
 implicants :
 val = 8 dash = 6 can cover :m(14,10,12,8)
 val = 4 dash = 8 can cover :m(12,4)
