@@ -6,13 +6,6 @@
 * [How to Use](#howtouse)
 
 [FolderStructure](#folderstructure)  
-* [Input_Interface](#input_interface)
-* [Output_Interface](#output_interface)
-* [Lib](#lib)
-* [demo](#demo_cpp)  
-* makefile   
-* main.cpp
-
 
 [DataStructure](#datastructure) 
 * [Function](#function)   
@@ -108,27 +101,49 @@ print(implicants2,Fan_in2);
 
 ## FolderStructure    
 
-### Lib  
-  * `QuineMcCluskey.hpp : Final interface, Include Generate prime implicants/min cover. `
-  * `Function.hpp       : A input format for kernel lib.`
-  * `Implicant.hpp      : A kernel part in Generate prime implicants.`
-  * `Prime_Implicant_Chart.hpp  : A kernel part in min cover.`
-  * `SAT.hpp  : A kernel part in min cover used to implement Petrick's method.`
 
 
-### demo_cpp 
-  * `QuineMcCluskey_demo.cpp  `
-  * `Prime_generate_demo.cpp  `
-  * `Prime_Implicant_Chart_demo.cpp `
-  * `SAT_demo.cpp `
+```
+Logic_Optimizer
+|
+|----Makefile  
+|----main.cpp
+|----README.md
+|----include
+|       |----Input/Input.hpp 
+|       |----Output/Output.hpp 
+|       |----QuineMcCluskey/QuineMcCluskey.hpp
+|
+|----src
+|     |----Function.hpp
+|     |----Implicant.hpp
+|     |----Implicant.cpp
+|     |----Prime_Implicant_Chart.hpp
+|     |----Prime_Implicant_Chart.cpp
+|     |----QuineMcCluskey.cpp
+|     |----SAT.hpp
+|     |----SAT.cpp
+|
+|
+|----tests
+|      |----Makefile
+|      |----Input/Input.cpp     
+|      |----Output/Output.cpp
+|      |----Prime_generate/Prime_generate.cpp
+|      |----Prime_Implicant_Chart/Prime_Implicant_Chart.cpp
+|      |----QuineMcCluskey/QuineMcCluskey.cpp
+|      |----SAT/SAT.cpp
+|      |----README.md
+|      |----Demo_Example.png
+| 
+|----doc
+|     |----CAD_PA3_Logic_Opt.pdf
+|     |----Optimization of the Quine-McCluskey Method for the Minimization.pdf
+|
+|----img
 
-### Input_Interface 
- * `Input.hpp` 
- * `Input_example.cpp` 
+```
 
-### Output_Interface 
- * `Output.hpp` 
- * `Output_example.cpp` 
 
 ## DataStructure   
 
