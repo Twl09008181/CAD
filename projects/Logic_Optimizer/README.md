@@ -36,10 +36,10 @@ check  [Implicant](#implicant)
 
 You can use your own I/O interface if you want.I write example of both, check  [Input_Interface](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/include/Input)   
 
-[Input_Example](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/test/Input) 
+[Input_Example](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/tests/Input) 
 
 and [Output_Interface](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/include/Output)
-[Output_Example](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/test/Output) 
+[Output_Example](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/tests/Output) 
 
 
 ### LibArchitecture   
