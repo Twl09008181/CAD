@@ -14,11 +14,8 @@
 * [Prime_Implicant_Chart](#prime_implicant_chart)  
 * [SAT_interface](#sat_interface ) 
 
-[Lib Demo](#demo)
-* [QuineMcCluskey_demo](#quinemccluskey_demo)
-* [Prime_Implicant_Chart_demo](#prime_implicant_chart_demo)
-* [Prime_generate_demo](#prime_generate_demo)
-* [SAT_demo](#sat_demo)   
+[LibTests](#tests)
+
 
 
 ## Introduction 
