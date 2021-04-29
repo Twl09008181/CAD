@@ -1,4 +1,4 @@
-#include "../lib/SAT.hpp"
+#include "../../src/SAT.hpp"
 #include <vector>
 #include <iostream>
 

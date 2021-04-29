@@ -2,7 +2,7 @@
 #ifndef INPUT_H
 #define INPUT_H
 
-#include "../lib/Function.hpp"
+#include "../../src/Function.hpp"
 
 
 #include <string>

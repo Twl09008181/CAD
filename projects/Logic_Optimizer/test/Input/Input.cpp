@@ -1,4 +1,4 @@
-#include "Input.hpp"
+#include "../../include/Input/Input.hpp"
 #include <iostream>
 #include <string>
 int main()

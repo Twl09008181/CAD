@@ -1,6 +1,6 @@
-#include "../lib/QuineMcCluskey.hpp"
-#include "../lib/Function.hpp"
-#include "Output.hpp"
+#include "../../include/QuineMcCluskey/QuineMcCluskey.hpp"
+#include "../../src/Function.hpp"
+#include "../../include/Output/Output.hpp"
 
 
 #include <sstream>

@@ -6,14 +6,14 @@
 #include <map>
 
 //--------------------------Data structure this lib use--------------------------
-#include "Function.hpp"
-#include "Implicant.hpp"
+#include "../../src/Function.hpp"
+#include "../../src/Implicant.hpp"
 using Implicant_Combine_table = std::vector<std::map <Implicant,bool>>;//use in phase 1 : find prime_implicants
-#include "Prime_Implicant_Chart.hpp"//use in phase2: find essential prime implcaints and cover terms by ESPI.
+#include "../../src/Prime_Implicant_Chart.hpp"//use in phase2: find essential prime implcaints and cover terms by ESPI.
 
 
 //--------------------------Petrick’s Method-------------------------------------
-#include "SAT.hpp"
+#include "../../src/SAT.hpp"
 
 //--------------------------print_depedency--------------------------------------
 #include <iostream>

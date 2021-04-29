@@ -2,16 +2,24 @@
 CC = g++ 
 FLAG = -std=c++11
 
-LIBSRC += $(wildcard ./lib/*.cpp)
+LIBSRC += $(wildcard ./src/*.cpp)
 LIBOBJ = $(patsubst %.cpp,%.o,$(LIBSRC))
-H += $(wildcard ./lib/*.hpp)
-H += ./Output_Interface/Output.hpp
-H += ./Intput_Interface/Input.hpp
 
-main :$(LIBOBJ) main.cpp
-	$(CC) $(FLAG) $^ -o $@ 
-main.o : $(NAME).cpp $(H)
+private_H += $(wildcard ./src/*.hpp)
+
+public_H  = ./include/Input/Input.hpp
+public_H  += ./include/Output/Output.hpp
+public_H += ./include/QuineMcCluskey/QuineMcCluskey.hpp
+
+main :$(LIBOBJ) main.cpp 
+	$(CC) $(FLAG) $^ -o $@
+
+main.o : main.cpp $(private_H) $(public_H) 
 	$(CC) $(FLAG) -c $<
+
+./src/QuineMcCluskey.o : ./src/QuineMcCluskey.cpp ./include/QuineMcCluskey/QuineMcCluskey.hpp
+	$(CC) $(FLAG) -c $< -o $@
+
 %.o : %.cpp %.hpp
 	$(CC) $(FLAG) -c $< -o $@ 
 clean:

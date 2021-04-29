@@ -1,8 +1,8 @@
-#include "../lib/Prime_Implicant_Chart.hpp"
-#include "../lib/Function.hpp"
-#include "../lib/Implicant.hpp"
-#include "../lib/QuineMcCluskey.hpp"
-#include "../lib/SAT.hpp"
+#include "../../src/Prime_Implicant_Chart.hpp"
+#include "../../src/Function.hpp"
+#include "../../src/Implicant.hpp"
+#include "../../include/QuineMcCluskey/QuineMcCluskey.hpp"
+#include "../../src/SAT.hpp"
 #include <algorithm>
 #include <vector>
 #include <iostream>

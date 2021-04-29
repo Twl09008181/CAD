@@ -1,6 +1,6 @@
-#include "../lib/QuineMcCluskey.hpp"
-#include "../lib/Implicant.hpp"
-#include "../lib/Function.hpp"
+#include "../../include/QuineMcCluskey/QuineMcCluskey.hpp"
+#include "../../src/Implicant.hpp"
+#include "../../src/Function.hpp"
 #include <iostream>
 
 std::ostream& operator<<(std::ostream &os, const std::vector<Implicant::type>&terms)

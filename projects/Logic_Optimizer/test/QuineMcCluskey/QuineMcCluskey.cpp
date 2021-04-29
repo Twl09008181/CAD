@@ -1,5 +1,5 @@
-#include "../lib/QuineMcCluskey.hpp"
-#include "../lib/Implicant.hpp"
+#include "../../include/QuineMcCluskey/QuineMcCluskey.hpp"
+#include "../../src/Implicant.hpp"
 #include <vector>
 #include <iostream>
 #include <map>

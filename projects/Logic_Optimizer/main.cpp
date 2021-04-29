@@ -1,6 +1,6 @@
-#include "./lib/QuineMcCluskey.hpp"
-#include "./Input_Interface/Input.hpp"
-#include "./Output_Interface/Output.hpp"
+#include "include/QuineMcCluskey/QuineMcCluskey.hpp"
+#include "include/Input/Input.hpp"
+#include "include/Output/Output.hpp"
 
 #include <string>
 #include <sstream>

@@ -1,4 +1,4 @@
-#include "QuineMcCluskey.hpp"
+#include "../include/QuineMcCluskey/QuineMcCluskey.hpp"
 
 
 
