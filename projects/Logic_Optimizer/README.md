@@ -41,8 +41,13 @@ check  [Implicant](#implicant)
 
 <img src = https://user-images.githubusercontent.com/52790122/115953634-454a5280-a51f-11eb-9b02-a12536271a8c.png width = "200">
 
-You can use your own I/O interface if you want.I write example of both, check  [Input_Interface](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/Input_Interface) 
-and [Output_Interface](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/Output_Interface)
+You can use your own I/O interface if you want.I write example of both, check  [Input_Interface](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/include/Input)   
+
+[Input_Example](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/test/Input) 
+
+and [Output_Interface](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/include/Output)
+[Output_Example](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/test/Output) 
+
 
 ### LibArchitecture   
 <img src = "https://user-images.githubusercontent.com/52790122/115954047-66ac3e00-a521-11eb-8f24-b06034b312ce.png">
@@ -52,7 +57,7 @@ and [Output_Interface](https://github.com/Twl09008181/CAD/tree/main/projects/Log
 ### HowToUse 
 
 
-Main.cpp has two example in [src](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/src) 
+Main.cpp has two example in [img](https://github.com/Twl09008181/CAD/tree/main/projects/Logic_Optimizer/img) 
 ```
 $ make
 g++  -std=c++11 -c lib/Implicant.cpp -o lib/Implicant.o
@@ -186,7 +191,7 @@ With cover , we can compare two implicants without iterating all characters and 
 
 
 **We can use cover and the val to combination all min term this implicant can cover**. 
-See [Implicant.cpp-Implicant::get_cover_terms()](https://github.com/Twl09008181/CAD/blob/main/projects/Logic_Optimizer/lib/Implicant.cpp)
+See [Implicant.cpp-Implicant::get_cover_terms()](https://github.com/Twl09008181/CAD/blob/main/projects/Logic_Optimizer/src/Implicant.cpp#L27)
 
 
 
@@ -217,7 +222,7 @@ This chart describe the relations between min_terms in function and prime implic
 ```
 With Implicant::get_cover_terms(),It is easy to list the minterms that can be cover of each prime implicant.    
 ```
-See [Prime_Implicant_Chart::draw](https://github.com/Twl09008181/CAD/blob/main/projects/Logic_Optimizer/lib/Prime_Implicant_Chart.cpp)
+See [Prime_Implicant_Chart::draw](https://github.com/Twl09008181/CAD/blob/main/projects/Logic_Optimizer/src/Prime_Implicant_Chart.cpp#L33)
 
 
 
@@ -306,7 +311,7 @@ void SAT::add_bracket(const bracket &br)
 ```
 
 How to use this interface :  
-[std::vector<int>Petrick_Method(Prime_Implicant_Chart &table,size_t remain_prime_num,size_t max_bracket_num)](https://github.com/Twl09008181/CAD/blob/main/projects/Logic_Optimizer/lib/QuineMcCluskey.cpp)
+[std::vector<int>Petrick_Method(Prime_Implicant_Chart &table,size_t remain_prime_num,size_t max_bracket_num)](https://github.com/Twl09008181/CAD/blob/main/projects/Logic_Optimizer/src/QuineMcCluskey.cpp#L69)
 
 ```
 std::vector<int>Petrick_Method(Prime_Implicant_Chart &table,size_t remain_prime_num,size_t max_bracket_num)
