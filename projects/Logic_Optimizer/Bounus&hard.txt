@@ -1,0 +1,12 @@
+加分:
+
+1.優化Combine的過程	
+2.新增Dont care功能
+
+
+遇到的困難:
+在SAT實現過程我需要確保同一個literal在不同的brackets當中同時改變值	
+因此我一開始使用了std::vector<bool>literals來記下所有的literal
+並且利用std::vector<bool*>當作每個bracket的型態,這樣更改literas內的值就能更改所有bracket的值	
+但是std::vector<bool>的元素不能進行 address of 運算,因為C++當中最小能使用address of 運算的要求是1byte
+一般來說bool type是1byte,但std::vector對boolean做優化,使得可以1bit實現,但也因此無法進行address of 
