@@ -70,6 +70,7 @@ std::vector<int>Petrick_Method(Prime_Implicant_Chart &table)
 {
     size_t remain_prime_num = table.get_Prime_vec().size() - table.get_Essential_prime().size();
     size_t max_bracket_num = table.get_un_converd_Min_term().size();
+    if(max_bracket_num==0)return {};
     SAT sat{max_bracket_num,remain_prime_num};
     for(auto &m : table.get_un_converd_Min_term())
     {
@@ -103,6 +104,7 @@ bool diff_one_bit(const Implicant&I1,const Implicant&I2)
 
     unsigned int diff = I1.get_val() ^ I2.get_val();//do xor , we can get difference
     
+    //若該數為2的次方,則指有最高位是1,其餘為0,因此該數-1會是自己的NOT ex 0100 --> 0011  互為Not,  N&!N =  0成立
     return ((diff)&(diff-1))==0;//diff is power of 2
 }
 
@@ -128,7 +130,15 @@ bool try_merge(Implicant_Combine_table &Col,std::vector<Implicant>&prime)
             if(term1.second)//be merge.
                 not_done = true;
             else //it is a prime implicant
+            {
                 prime.push_back(term1.first);
+            }
+        }
+    }
+    for(auto &term1 : Col[max_num_of_one - 1])//buf fixed : Forgot to consider the Col[max_num_of_one].... 
+    {
+        if(!term1.second){
+            prime.push_back(term1.first);
         }
     }
     Col.swap(Next_Col);
